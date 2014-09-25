@@ -83,7 +83,7 @@
 <part>id</part>
 </key>
 </table>
-<table x="722" y="422" name="enrollment">
+<table x="724" y="442" name="enrollment">
 <row name="course" null="1" autoincrement="0">
 <datatype>TINYINT</datatype>
 <default>NULL</default><relation table="courses" row="id" />
@@ -107,7 +107,7 @@
 <key type="PRIMARY" name="">
 </key>
 </table>
-<table x="735" y="311" name="sessions">
+<table x="727" y="308" name="sessions">
 <row name="id" null="1" autoincrement="1">
 <datatype>TINYINT</datatype>
 <default>NULL</default></row>
@@ -118,6 +118,9 @@
 <row name="title" null="1" autoincrement="0">
 <datatype>TINYINT</datatype>
 <default>NULL</default></row>
+<row name="url_code" null="0" autoincrement="0">
+<datatype>VARCHAR(5)</datatype>
+</row>
 <key type="PRIMARY" name="">
 <part>id</part>
 </key>

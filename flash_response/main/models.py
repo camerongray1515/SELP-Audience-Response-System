@@ -43,6 +43,7 @@ class Enrollment(models.Model):
 class Session(models.Model):
     course = models.ForeignKey(Course)
     title = models.CharField(max_length=255)
+    url_code = models.CharField(max_length=5, default='')
 
     def __str__(self):
         return self.title
