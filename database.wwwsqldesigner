@@ -107,7 +107,7 @@
 <key type="PRIMARY" name="">
 </key>
 </table>
-<table x="736" y="311" name="classes">
+<table x="735" y="311" name="sessions">
 <row name="id" null="1" autoincrement="1">
 <datatype>TINYINT</datatype>
 <default>NULL</default></row>
@@ -126,9 +126,9 @@
 <row name="id" null="1" autoincrement="1">
 <datatype>TINYINT</datatype>
 <default>NULL</default></row>
-<row name="class" null="1" autoincrement="0">
+<row name="session" null="1" autoincrement="0">
 <datatype>TINYINT</datatype>
-<default>NULL</default><relation table="classes" row="id" />
+<default>NULL</default><relation table="sessions" row="id" />
 </row>
 <row name="question_body" null="1" autoincrement="0">
 <datatype>MEDIUMTEXT</datatype>
