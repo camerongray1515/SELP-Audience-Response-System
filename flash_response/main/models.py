@@ -44,6 +44,9 @@ class Session(models.Model):
     course = models.ForeignKey(Course)
     title = models.CharField(max_length=255)
     url_code = models.CharField(max_length=5, default='')
+    # Formed like this because Question hasn't been defined yet
+    current_question = models.ForeignKey('Question', related_name='Question', null=True, blank=True)
+    running = models.BooleanField(default=False)
 
     def __str__(self):
         return self.title

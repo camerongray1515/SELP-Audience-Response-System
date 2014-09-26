@@ -83,7 +83,7 @@
 <part>id</part>
 </key>
 </table>
-<table x="724" y="442" name="enrollment">
+<table x="723" y="490" name="enrollment">
 <row name="course" null="1" autoincrement="0">
 <datatype>TINYINT</datatype>
 <default>NULL</default><relation table="courses" row="id" />
@@ -95,7 +95,7 @@
 <key type="PRIMARY" name="">
 </key>
 </table>
-<table x="689" y="222" name="tutor_assignment">
+<table x="690" y="166" name="tutor_assignment">
 <row name="tutor" null="1" autoincrement="0">
 <datatype>TINYINT</datatype>
 <default>NULL</default><relation table="tutors" row="id" />
@@ -107,7 +107,7 @@
 <key type="PRIMARY" name="">
 </key>
 </table>
-<table x="727" y="308" name="sessions">
+<table x="727" y="275" name="sessions">
 <row name="id" null="1" autoincrement="1">
 <datatype>TINYINT</datatype>
 <default>NULL</default></row>
@@ -120,6 +120,13 @@
 <default>NULL</default></row>
 <row name="url_code" null="0" autoincrement="0">
 <datatype>VARCHAR(5)</datatype>
+</row>
+<row name="current_question" null="1" autoincrement="0">
+<datatype>TINYINT</datatype>
+<default>NULL</default><relation table="questions" row="id" />
+</row>
+<row name="running" null="0" autoincrement="0">
+<datatype>bit</datatype>
 </row>
 <key type="PRIMARY" name="">
 <part>id</part>
@@ -158,7 +165,7 @@
 <part>id</part>
 </key>
 </table>
-<table x="787" y="529" name="student_responses">
+<table x="791" y="572" name="student_responses">
 <row name="student" null="1" autoincrement="0">
 <datatype>TINYINT</datatype>
 <default>NULL</default><relation table="students" row="id" />
