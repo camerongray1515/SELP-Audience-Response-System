@@ -1,0 +1,41 @@
+{% extends "base.html" %}
+
+{% block content %}
+    <div class="col-md-12">
+        <div class="modal-dialog" style="margin-bottom:0">
+            <div class="modal-content">
+                <div class="panel-heading">
+                    {% if realm == 'student' %}
+                        <h1 class="panel-title">
+                            Login as a Student
+                            <a href="/login/tutor" class="btn btn-default pull-right">Login as a Tutor instead</a>
+                        </h1>
+                    {% elif realm == 'tutor' %}
+                        <h1 class="panel-title">
+                            Login as a Tutor
+                            <a href="/login/student" class="btn btn-default pull-right">Login as a Student instead</a>
+                        </h1>
+                    {% endif %}
+                </div>
+                <div class="panel-body">
+                    {% if login_error %}
+                        <div class="alert alert-danger">
+                            <strong>Error!</strong> No {{ realm|title }} with that username/password found!
+                        </div>
+                    {% endif %}
+                    <form role="form" method="POST">{% csrf_token %}
+                        <fieldset>
+                            <div class="form-group">
+                                <input class="form-control" placeholder="Username" name="username" type="text" autofocus>
+                            </div>
+                            <div class="form-group">
+                                <input class="form-control" placeholder="Password" name="password" type="password">
+                            </div>
+                            <button id="btn-login" class="btn btn-success">Login</button>
+                        </fieldset>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
