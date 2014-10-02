@@ -2,6 +2,7 @@ from django.shortcuts import render, render_to_response
 from django.core.context_processors import csrf
 from django.contrib.auth import authenticate, login, logout
 from main.models import Student, Tutor
+from django.http import HttpResponseRedirect
 
 def login_main(request):
     return render_to_response('login_main.html')
@@ -32,6 +33,8 @@ def login_form(request, realm):
             if user.is_active and is_in_realm:
                 login(request, user)
                 data['login_error'] = False;
+
+                return HttpResponseRedirect('/{0}/'.format(realm))
 
     return render_to_response('login_form.html', data);
 
