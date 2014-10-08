@@ -1,0 +1,22 @@
+{% extends "base.html" %}
+
+{% block body %}
+    <nav class="navbar navbar-default navbar-fixed-top" role="navigation">
+        <div class="container-fluid">
+            <div class="navbar-header">
+                <span class="navbar-brand">Tutor Area</span>
+            </div>
+
+            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                <ul class="nav navbar-nav">
+                    <li><a href="/tutor/">Home</a></li>
+                    <li><a href="/tutor/courses/">Courses</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <div id="content-container"> 
+        {% block content %}{% endblock %}
+    </div>
+{% endblock %}
