@@ -2,5 +2,12 @@
 
 {% block content %}
     <h1>Welcome to Flash Response</h1>
-    <p>You should go to <a href="/tutor/courses/">your courses</a> in order to add/modify sessions and more.</p>
+    {% if request.session.course_id %}
+
+    {% else %}
+        <div class="alert alert-info">
+            <strong>Notice:</strong>
+            To continue you must select a course from the menu in the top right of the screen.
+        </div>
+    {% endif %}
 {% endblock %}

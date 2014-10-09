@@ -10,8 +10,23 @@
             <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                 <ul class="nav navbar-nav">
                     <li><a href="/tutor/">Home</a></li>
-                    <li><a href="/tutor/courses/">Courses</a></li>
+                    {% if request.session.course_id %}
+                        <li><a href="/tutor/courses/">Courses</a></li>
+                    {% endif %}
                 </ul>
+
+                <form class="navbar-form navbar-right" method="POST" action="/tutor/select_course/" id="course-selection-form">
+                    <div class="form-group">
+                        Select Course: <select id="course-selection" name="course" class="form-control">
+                            <option>- Select a course -</option>
+                            {% for assignment in course_assignments %}
+                                <option value="{{assignment.course.id}}"{% if request.session.course_id == assignment.course.id %} selected {% endif %}>{{assignment.course.title}}</option>
+                            {% endfor %}
+                        </select>
+                    </div>
+
+                    <a href="/login/logout/" class="btn btn-danger">Logout</a>
+                </form>
             </div>
         </div>
     </nav>
