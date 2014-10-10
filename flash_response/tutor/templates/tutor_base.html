@@ -11,7 +11,7 @@
                 <ul class="nav navbar-nav">
                     <li><a href="/tutor/">Home</a></li>
                     {% if request.session.course_id %}
-                        <li><a href="/tutor/courses/">Courses</a></li>
+                        <li><a href="/tutor/sessions/">Sessions</a></li>
                     {% endif %}
                 </ul>
 
@@ -32,6 +32,15 @@
     </nav>
 
     <div id="content-container"> 
+        {% block alerts %}
+            {% if error %}
+                <div class="alert alert-danger"><strong>Error!</strong> {{ error }}</div>
+            {% endif %}
+            {% if success %}
+                <div class="alert alert-success"><strong>Success!</strong> {{ success }}</div>
+            {% endif %}
+        {% endblock %}
         {% block content %}{% endblock %}
+        
     </div>
 {% endblock %}

@@ -165,7 +165,7 @@
 <part>id</part>
 </key>
 </table>
-<table x="791" y="572" name="student_responses">
+<table x="774" y="597" name="student_responses">
 <row name="student" null="1" autoincrement="0">
 <datatype>TINYINT</datatype>
 <default>NULL</default><relation table="students" row="id" />

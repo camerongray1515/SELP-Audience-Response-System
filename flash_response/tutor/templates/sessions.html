@@ -1,0 +1,27 @@
+{% extends "tutor_base.html" %}
+
+{% block content %}
+    <h2>Sessions</h2>
+
+    <p>A session is a block of questions that will be presented at one time, you may want to have one session per lecture/class/presentation.</p>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Session Title</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+
+        <tbody>
+            {% for session in sessions %}
+                <tr>
+                    <td>{{ session.title }}</td>
+                    <td></td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+
+    <a href="/tutor/sessions/new/" class="btn btn-primary"><span class="glyphicon glyphicon-plus"></span> Add New Session</a>
+{% endblock %}
