@@ -3,7 +3,7 @@
 {% block content %}
     {% if type == 'edit' %}
         <h2>Edit Question</h2>
-    {% elif type == 'add' %}
+    {% elif type == 'new' %}
         <h2>Add Question</h2>
     {% else %}
         <h2>You forgot to set a "type" in the view ya dafty</h2>
@@ -46,7 +46,7 @@
 
         {% if type == 'edit' %}
             <button class="btn btn-success"><span class="glyphicon glyphicon-floppy-disk"></span> Save Question</button>
-        {% elif type == 'add' %}
+        {% elif type == 'new' %}
             <button class="btn btn-success"><span class="glyphicon glyphicon-plus"></span> Add Question</button>
         {% endif %}
     </form>

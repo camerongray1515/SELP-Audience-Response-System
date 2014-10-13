@@ -106,3 +106,8 @@ def edit_question(request, question_id):
     data['question_options'] = Question_option.objects.filter(question=q)
 
     return render_to_response('question_form.html', data, context_instance=RequestContext(request))
+
+def new_question(request):
+    data = {'type': 'new'}
+
+    return render_to_response('question_form.html', data, context_instance=RequestContext(request))
