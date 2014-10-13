@@ -2,7 +2,7 @@ from django.shortcuts import render, render_to_response
 from main.decorators import user_is_tutor, tutor_course_is_selected
 from django.template import RequestContext
 from django.http import HttpResponseRedirect
-from main.models import Tutor_assignment, Tutor, Session, Question
+from main.models import Tutor_assignment, Tutor, Session, Question, Question_option
 from django.views.decorators.csrf import csrf_exempt
 from django.core.exceptions import ObjectDoesNotExist
 
@@ -89,3 +89,20 @@ def edit_session(request, session_id):
     data['questions'] = Question.objects.filter(session=session_id)
 
     return render_to_response('edit_session.html', data, context_instance=RequestContext(request))
+
+@user_is_tutor
+@tutor_course_is_selected
+def edit_question(request, question_id):
+    data = {'type': 'edit'}
+
+    # Get the question and check the session to be sure the tutor owns the question
+    try:
+        q = Question.objects.get(pk=question_id)
+        s = Session.objects.get(pk=q.session.pk, course=request.session['course_id'])
+    except ObjectDoesNotExist:
+        data['error'] = 'The question specified could not be found'
+        return render_to_response('error.html', data, context_instance=RequestContext(request))
+    data['question'] = q
+    data['question_options'] = Question_option.objects.filter(question=q)
+
+    return render_to_response('question_form.html', data, context_instance=RequestContext(request))

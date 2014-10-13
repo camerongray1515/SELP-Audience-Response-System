@@ -17,7 +17,9 @@
             {% for session in sessions %}
                 <tr>
                     <td>{{ session.title }}</td>
-                    <td></td>
+                    <td>
+                        <a href="/tutor/sessions/edit/{{ session.pk }}/" class="btn btn-info"><span class="glyphicon glyphicon-edit"></span> Edit</a>
+                    </td>
                 </tr>
             {% endfor %}
         </tbody>

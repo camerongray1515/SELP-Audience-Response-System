@@ -5,7 +5,7 @@ def course_assignments_processor(request):
     tutor = None
     if request.user.is_authenticated:
         try:
-            tutor = Tutor.objects.get(user=request.user) # Get the logged in tutor
+            tutor = Tutor.objects.get(user=request.user.pk) # Get the logged in tutor
         except ObjectDoesNotExist:
             pass
             
