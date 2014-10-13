@@ -16,6 +16,14 @@ $(document).ready(function() {
     $('#add-question-option').click(function() {
         html = $('#option-row-template').html();
 
+        // We now need to get the number of current options to set the names on the
+        // new inputs and then incrememnt the value accordingly
+        option_id = $('#max-options').val();
+        $('#max-options').val(parseInt(option_id)+1);
+
+        // Replace the placeholder in the template
+        html = html.replace(/#option_id#/g, option_id);
+
         // Append row before the second last row
         $('#option-table tr:last').before(html);
 

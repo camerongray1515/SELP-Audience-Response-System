@@ -11,8 +11,8 @@
 
     <script id="option-row-template" type="text/html">
         <tr>
-            <td><input type="text" class="form-control" name="option-body[]"></td>
-            <td><input type="checkbox" name="option-correct[]"></td>
+            <td><input type="text" class="form-control" name="option-body[#option_id#]"></td>
+            <td><input type="checkbox" name="option-correct[#option_id#]"></td>
             <td><button class="remove-option btn btn-danger btn-sm"><span class="glyphicon glyphicon-remove"></span></button></td>
         </tr>
     </script>
@@ -35,11 +35,13 @@
             <tbody>
                 {% for option in question_options %}
                     <tr>
-                        <td><input type="text" class="form-control" name="option-body[]" value="{{ option.body }}"></td>
-                        <td><input type="checkbox" name="option-correct[]" {% if option.correct %}checked{% endif %}></td>
+                        <td><input type="text" class="form-control" name="option-body[{{ forloop.counter0 }}]" value="{{ option.body }}"></td>
+                        <td><input type="checkbox" name="option-correct[{{ forloop.counter0 }}]" {% if option.correct %}checked{% endif %}></td>
                         <td><button class="remove-option btn btn-danger btn-sm"><span class="glyphicon glyphicon-remove"></span></button></td>
                     </tr>
                 {% endfor %}
+                <input type="hidden" name="max-options" id="max-options" value="{{ question_options|length }}">
+
                 <tr><td><button class="btn btn-primary" id="add-question-option"><span class="glyphicon glyphicon-plus"></span> Add Option</button></td><td></td><td></td></tr>
             </tbody>
         </table>

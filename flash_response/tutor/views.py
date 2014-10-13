@@ -112,25 +112,26 @@ def new_question(request, session_id):
 
     if request.method == 'POST':
         question = request.POST.get('question')
-        option_bodies = request.POST.getlist('option-body[]')
-        option_correct = request.POST.getlist('option-correct[]')
+        max_options = request.POST.get('max-options')
 
-        # Question must have at least one option and have a body set
-        if len(option_bodies) and question:
-            # There must be at least one non-empty option
-            contains_option = False
-            for option in option_bodies:
-                if (option):
-                    contains_option = True
+        # Question must have a body set
+        if question:
+            # We can now add the question to the database
+            q = Question()
+            q.session_id = session_id
+            q.question_body = question
+            q.save()
 
-            if contains_option:
-                # We can now add the question to the database
-                q = Question()
-
-            else:
-                data['error'] = 'Your question must have at least one option'
-
-
+            for x in range(0,int(max_options)):
+                # Is there an option set at this index?
+                option_body = request.POST.get('option-body[{0}]'.format(x))
+                option_correct = bool(request.POST.get('option-correct[{0}]'.format(x)))
+                if option_body:
+                    o = Question_option()
+                    o.question_id = q.pk
+                    o.body = option_body
+                    o.correct = option_correct
+                    o.save()
         else:
             data['error'] = 'Your question must have a body and at least one option'
 
