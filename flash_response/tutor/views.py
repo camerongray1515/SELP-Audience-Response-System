@@ -92,7 +92,7 @@ def edit_session(request, session_id):
 
 @user_is_tutor
 @tutor_course_is_selected
-def edit_question(request, question_id):
+def edit_question(request, session_id, question_id):
     data = {'type': 'edit'}
 
     # Get the question and check the session to be sure the tutor owns the question
@@ -107,7 +107,31 @@ def edit_question(request, question_id):
 
     return render_to_response('question_form.html', data, context_instance=RequestContext(request))
 
-def new_question(request):
+def new_question(request, session_id):
     data = {'type': 'new'}
+
+    if request.method == 'POST':
+        question = request.POST.get('question')
+        option_bodies = request.POST.getlist('option-body[]')
+        option_correct = request.POST.getlist('option-correct[]')
+
+        # Question must have at least one option and have a body set
+        if len(option_bodies) and question:
+            # There must be at least one non-empty option
+            contains_option = False
+            for option in option_bodies:
+                if (option):
+                    contains_option = True
+
+            if contains_option:
+                # We can now add the question to the database
+                q = Question()
+
+            else:
+                data['error'] = 'Your question must have at least one option'
+
+
+        else:
+            data['error'] = 'Your question must have a body and at least one option'
 
     return render_to_response('question_form.html', data, context_instance=RequestContext(request))

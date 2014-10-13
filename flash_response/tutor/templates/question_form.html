@@ -17,7 +17,7 @@
         </tr>
     </script>
 
-    <form class="form" role="form" method="POST">
+    <form class="form" role="form" method="POST">{% csrf_token %}
         <div class="form-group">
             <label for="question">Question Body:</label>
             <input type="text" class="form-control" name="question" id="question" value="{{ question.question_body }}" />

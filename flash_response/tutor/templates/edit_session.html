@@ -10,7 +10,7 @@
                 <div class="panel-heading">{{ question.question_body }}</div>
                 <div class="panel-body">
                     <form method="POST">{% csrf_token %}
-                        <a href="/tutor/questions/edit/{{ question.id }}/" class="btn btn-sm btn-info"><span class="glyphicon glyphicon-edit"></span> Edit</a>
+                        <a href="/tutor/sessions/{{ session.pk }}/questions/edit/{{ question.id }}/" class="btn btn-sm btn-info"><span class="glyphicon glyphicon-edit"></span> Edit</a>
                         <input type="hidden" name="question-id" value="{{ question.id }}">
                         <!--{% if not forloop.first %}
                             <button name="move-up" class="btn btn-sm btn-success"><span class="glyphicon glyphicon-arrow-up"></span> Move Up</button>
@@ -23,7 +23,7 @@
                 </div>
             </div>
         {% endfor %}
-        <a href="/tutor/questions/new/" class="btn btn-success"><span class="glyphicon glyphicon-plus"></span> Add Question</a>
+        <a href="/tutor/sessions/{{ session.pk }}/questions/add/" class="btn btn-success"><span class="glyphicon glyphicon-plus"></span> Add Question</a>
     {% else %}
         <div class="alert alert-info"><strong>Notice:</strong> This session does not contain any questions, yet!</div>
     {% endif %}
