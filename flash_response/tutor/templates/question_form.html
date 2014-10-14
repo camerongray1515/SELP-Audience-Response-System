@@ -13,7 +13,7 @@
         <tr>
             <td><input type="text" class="form-control" name="option-body[#option_id#]"></td>
             <td><input type="checkbox" name="option-correct[#option_id#]"></td>
-            <td><button class="remove-option btn btn-danger btn-sm"><span class="glyphicon glyphicon-remove"></span></button></td>
+            <td><button type="button" class="remove-option btn btn-danger btn-sm"><span class="glyphicon glyphicon-remove"></span></button></td>
         </tr>
     </script>
 
@@ -37,19 +37,19 @@
                     <tr>
                         <td><input type="text" class="form-control" name="option-body[{{ forloop.counter0 }}]" value="{{ option.body }}"></td>
                         <td><input type="checkbox" name="option-correct[{{ forloop.counter0 }}]" {% if option.correct %}checked{% endif %}></td>
-                        <td><button class="remove-option btn btn-danger btn-sm"><span class="glyphicon glyphicon-remove"></span></button></td>
+                        <td><button type="button" class="remove-option btn btn-danger btn-sm {{ forloop.counter0 }}"><span class="glyphicon glyphicon-remove"></span></button></td>
                     </tr>
                 {% endfor %}
                 <input type="hidden" name="max-options" id="max-options" value="{{ question_options|length }}">
 
-                <tr><td><button class="btn btn-primary" id="add-question-option"><span class="glyphicon glyphicon-plus"></span> Add Option</button></td><td></td><td></td></tr>
+                <tr><td><button type="button" class="btn btn-primary" id="add-question-option"><span class="glyphicon glyphicon-plus"></span> Add Option</button></td><td></td><td></td></tr>
             </tbody>
         </table>
 
         {% if type == 'edit' %}
-            <button class="btn btn-success"><span class="glyphicon glyphicon-floppy-disk"></span> Save Question</button>
+            <button type="submit" class="btn btn-success"><span class="glyphicon glyphicon-floppy-disk"></span> Save Question</button>
         {% elif type == 'new' %}
-            <button class="btn btn-success"><span class="glyphicon glyphicon-plus"></span> Add Question</button>
+            <button type="submit" class="btn btn-success"><span class="glyphicon glyphicon-plus"></span> Add Question</button>
         {% endif %}
     </form>
 {% endblock %}

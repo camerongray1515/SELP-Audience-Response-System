@@ -55,7 +55,7 @@ def new_session(request):
             s.course_id = request.session['course_id']
             s.save()
 
-            return HttpResponseRedirect('/tutor/sessions/edit/{0}'.format(s.pk))
+            return HttpResponseRedirect('/tutor/sessions/{0}'.format(s.pk))
         else:
             data['error'] = 'You must specify a title for this session'
 
@@ -95,6 +95,39 @@ def edit_session(request, session_id):
 def edit_question(request, session_id, question_id):
     data = {'type': 'edit'}
 
+    # Check we are allowed to actually access this session
+    if not Session.objects.filter(id=session_id, course=request.session['course_id']):
+        data['error'] = 'The session specified could not be found'
+        return render_to_response('error.html', data, context_instance=RequestContext(request))
+
+    if request.method == 'POST':
+        question = request.POST.get('question')
+        max_options = request.POST.get('max-options')
+
+        # Question must have a body set and the current course must contain the session
+        if question:
+            # We can now add the question to the database
+            q = Question.objects.get(pk=question_id)
+            q.question_body = question
+            q.save()
+
+            # Delete all current question options
+            Question_option.objects.filter(question_id=question_id).delete()
+            for x in range(0,int(max_options)):
+                # Is there an option set at this index?
+                option_body = request.POST.get('option-body[{0}]'.format(x))
+                option_correct = bool(request.POST.get('option-correct[{0}]'.format(x)))
+                if option_body:
+                    o = Question_option()
+                    o.question_id = question_id
+                    o.body = option_body
+                    o.correct = option_correct
+                    o.save()
+
+            return HttpResponseRedirect('/tutor/sessions/{0}/'.format(session_id))
+        else:
+            data['error'] = 'Your question must have a body'
+
     # Get the question and check the session to be sure the tutor owns the question
     try:
         q = Question.objects.get(pk=question_id)
@@ -110,11 +143,16 @@ def edit_question(request, session_id, question_id):
 def new_question(request, session_id):
     data = {'type': 'new'}
 
+    # Check we are allowed to actually access this session
+    if not Session.objects.filter(id=session_id, course=request.session['course_id']):
+        data['error'] = 'The session specified could not be found'
+        return render_to_response('error.html', data, context_instance=RequestContext(request))
+
     if request.method == 'POST':
         question = request.POST.get('question')
         max_options = request.POST.get('max-options')
 
-        # Question must have a body set
+        # Question must have a body set and the current course must contain the session
         if question:
             # We can now add the question to the database
             q = Question()
@@ -132,7 +170,9 @@ def new_question(request, session_id):
                     o.body = option_body
                     o.correct = option_correct
                     o.save()
+
+            return HttpResponseRedirect('/tutor/sessions/{0}/'.format(session_id))
         else:
-            data['error'] = 'Your question must have a body and at least one option'
+            data['error'] = 'Your question must have a body'
 
     return render_to_response('question_form.html', data, context_instance=RequestContext(request))

@@ -29,9 +29,9 @@ $(document).ready(function() {
 
         return false; // Block default form sumbit
     });
-    
-    $(document).on('click', '.remove-option', function() {
-        $(this).closest('tr').remove();
-        return false;
-    });
+});
+
+$(document).on('click', '.remove-option', function() {
+    $(this).closest('tr').remove();
+    return false;
 });
