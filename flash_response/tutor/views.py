@@ -140,6 +140,8 @@ def edit_question(request, session_id, question_id):
 
     return render_to_response('question_form.html', data, context_instance=RequestContext(request))
 
+@user_is_tutor
+@tutor_course_is_selected
 def new_question(request, session_id):
     data = {'type': 'new'}
 
