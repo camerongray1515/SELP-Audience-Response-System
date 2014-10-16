@@ -15,9 +15,10 @@
 
         <tbody>
             {% for session in sessions %}
-                <tr>
+                <tr {% if session.active %}class="danger"{% endif %}>
                     <td>{{ session.title }}</td>
                     <td>
+                        <a href="/tutor/sessions/run/{{ session.pk }}/" class="btn btn-success"><span class="glyphicon glyphicon-play"></span> Launch Session</a>
                         <a href="/tutor/sessions/{{ session.pk }}/" class="btn btn-info"><span class="glyphicon glyphicon-edit"></span> Edit</a>
                     </td>
                 </tr>

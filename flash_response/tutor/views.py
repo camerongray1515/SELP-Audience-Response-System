@@ -5,6 +5,7 @@ from django.http import HttpResponseRedirect
 from main.models import Tutor_assignment, Tutor, Session, Question, Question_option
 from django.views.decorators.csrf import csrf_exempt
 from django.core.exceptions import ObjectDoesNotExist
+from tutor.helpers import *
 
 @user_is_tutor
 def welcome(request):
@@ -178,3 +179,34 @@ def new_question(request, session_id):
             data['error'] = 'Your question must have a body'
 
     return render_to_response('question_form.html', data, context_instance=RequestContext(request))
+
+@user_is_tutor
+@tutor_course_is_selected
+def run_session(request, session_id):
+    data = {}
+
+    # If the session is already running, just get it.  If it is not currently running,
+    # we will then stop all sessions in the selected course then mark this session
+    # as running and generate a URL for it.
+    try:
+        s = Session.objects.get(pk=session_id, course=request.session['course_id'])
+    except ObjectDoesNotExist:
+        data['error'] = 'The session specified could not be found'
+        return render_to_response('error.html', data, context_instance=RequestContext(request))
+    
+    data['questions'] = Question.objects.filter(session=s)
+    if not len(data['questions']):
+        data['error'] = 'You cannot launch a session that does not contain any questions'
+        return render_to_response('error.html', data, context_instance=RequestContext(request))
+
+    if not s.running:
+        Session.objects.filter(course=request.session['course_id']).exclude(pk=session_id).update(running=False)
+        s.running = True
+        s.url_code = generate_session_url_code()
+        s.save()
+
+    data['session'] = s
+    data['response_url'] = build_url(request, s.url_code)
+
+
+    return render_to_response('running_session.html', data, context_instance=RequestContext(request))

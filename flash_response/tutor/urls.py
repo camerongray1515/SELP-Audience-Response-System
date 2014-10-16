@@ -9,4 +9,5 @@ urlpatterns = patterns('',
     url(r'^sessions/(?P<session_id>\d+)/$', 'tutor.views.edit_session'),
     url(r'^sessions/(?P<session_id>\d+)/questions/add/$', 'tutor.views.new_question'),
     url(r'^sessions/(?P<session_id>\d+)/questions/edit/(?P<question_id>\d+)/$', 'tutor.views.edit_question'),
+    url(r'^sessions/run/(?P<session_id>\d+)/$', 'tutor.views.run_session'),
 )

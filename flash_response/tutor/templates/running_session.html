@@ -1,0 +1,29 @@
+{% extends "tutor_base.html" %}
+
+{% block content %}
+    <h2>Session Running</h2>
+
+    <div class="alert alert-info"><strong>The response URL for this session is: </strong><a href="{{ response_url }}">{{ response_url }}</a></div>
+
+    <div class="panel panel-default">
+        <div class="panel-heading">Run a question:</div>
+        <div class="panel-body">
+            <form class="form-inline" role="form">
+                Run question 
+                <div class="form-group">
+                    <select id="question" class="form-control">
+                        {% for question in questions %}
+                            <option value="{{ question.pk }}">{{ question.question_body }}</option>
+                        {% endfor %}
+                    </select>
+                </div>
+                for
+                <div class="form-group">
+                    <input type="text" value="30" id="question-time" class="form-control input-narrow">
+                </div>
+                seconds
+                <button class="btn btn-primary" id="start-question"><span class="glyphicon glyphicon-play"></span> Start Question</button>
+            </form>
+        </div>
+    </div>
+{% endblock %}
