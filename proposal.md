@@ -22,8 +22,11 @@ Technologies
 ------------
 ### Backend
 I plan on writing the backend in Python using the Django framework.  I have picked this for several reasons:
+
 * I am already familiar with the framework and the Python language in general
+
 * It does a lot of common tasks automatically saving development time
+
 * The included ORM lends itself well to this sort of application
 
 I also plan on using SQLite as the database during development due to it being easily portable between systems.  This is sufficient for testing however if this application were to be used in a production environment the database would need to be switched for something more powerful like PostgreSQL.  Django's ORM however would allow the Database to be swapped out without any code changes to the application.
