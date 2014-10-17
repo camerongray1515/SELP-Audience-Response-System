@@ -5,4 +5,10 @@ This file is just a brain dump of stuff that has come up during implementation a
 Data Structure
 --------------
 * Explain database
+
 * Why are models in a "main" app?
+
+Procedures/Methods
+------------------
+* Why there is a "countdown time" before each question starts
+    - To allow all devices to keep in sync
