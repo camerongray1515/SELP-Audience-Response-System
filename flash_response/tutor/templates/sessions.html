@@ -15,7 +15,7 @@
 
         <tbody>
             {% for session in sessions %}
-                <tr {% if session.active %}class="danger"{% endif %}>
+                <tr {% if session.running %}class="success"{% endif %}>
                     <td>{{ session.title }}</td>
                     <td>
                         <a href="/tutor/sessions/run/{{ session.pk }}/" class="btn btn-success"><span class="glyphicon glyphicon-play"></span> Launch Session</a>
