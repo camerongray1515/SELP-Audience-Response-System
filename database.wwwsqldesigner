@@ -95,7 +95,7 @@
 <key type="PRIMARY" name="">
 </key>
 </table>
-<table x="690" y="166" name="tutor_assignment">
+<table x="631" y="145" name="tutor_assignment">
 <row name="tutor" null="1" autoincrement="0">
 <datatype>TINYINT</datatype>
 <default>NULL</default><relation table="tutors" row="id" />
@@ -121,10 +121,6 @@
 <row name="url_code" null="0" autoincrement="0">
 <datatype>VARCHAR(5)</datatype>
 </row>
-<row name="current_question" null="1" autoincrement="0">
-<datatype>TINYINT</datatype>
-<default>NULL</default><relation table="questions" row="id" />
-</row>
 <row name="running" null="0" autoincrement="0">
 <datatype>bit</datatype>
 </row>
@@ -132,7 +128,7 @@
 <part>id</part>
 </key>
 </table>
-<table x="941" y="236" name="questions">
+<table x="1058" y="345" name="questions">
 <row name="id" null="1" autoincrement="1">
 <datatype>TINYINT</datatype>
 <default>NULL</default></row>
@@ -147,7 +143,7 @@
 <part>id</part>
 </key>
 </table>
-<table x="1101" y="346" name="question_options">
+<table x="1249" y="476" name="question_options">
 <row name="id" null="1" autoincrement="1">
 <datatype>TINYINT</datatype>
 <default>NULL</default></row>
@@ -174,6 +170,24 @@
 <datatype>TINYINT</datatype>
 <default>NULL</default><relation table="question_options" row="id" />
 </row>
+<key type="PRIMARY" name="">
+</key>
+</table>
+<table x="945" y="168" name="current_questions">
+<row name="session" null="1" autoincrement="0">
+<datatype>TINYINT</datatype>
+<default>NULL</default><relation table="sessions" row="id" />
+</row>
+<row name="question" null="1" autoincrement="0">
+<datatype>TINYINT</datatype>
+<default>NULL</default><relation table="questions" row="id" />
+</row>
+<row name="start_time" null="0" autoincrement="0">
+<datatype>DATETIME</datatype>
+</row>
+<row name="run_time" null="1" autoincrement="0">
+<datatype>SMALLINT</datatype>
+<default>NULL</default></row>
 <key type="PRIMARY" name="">
 </key>
 </table>

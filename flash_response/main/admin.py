@@ -33,6 +33,10 @@ class Question_admin(admin.ModelAdmin):
 class Question_option_admin(admin.ModelAdmin):
     pass
 
+@admin.register(Current_question)
+class Current_question_admin(admin.ModelAdmin):
+    pass
+
 @admin.register(Student_response)
 class Student_response_admin(admin.ModelAdmin):
     pass
