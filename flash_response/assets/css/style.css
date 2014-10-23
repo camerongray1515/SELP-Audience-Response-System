@@ -7,3 +7,11 @@
 input.input-narrow {
     width: 50px !important;
 }
+
+#question-running {
+    display: none;
+}
+
+#question-progress-bars {
+    display: none;
+}

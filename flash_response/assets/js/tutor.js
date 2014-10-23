@@ -1,3 +1,85 @@
+function RunningSession() {
+    var myQuestionId = 0;
+    var mySessionId = 0;
+    var myRunTime = 0;
+
+    this.startQuestion = function(questionId, sessionId, runTime) {
+        // Send a request to the server to start the question.  The server will then respond
+        // with a number of seconds until the question starts, the UI will then display a
+        // countdown until the question starts and then change to a countdown until the
+        // question ends.
+
+        myQuestionId = questionId;
+        mySessionId = sessionId;
+        myRunTime = runTime;
+
+        $.post('/tutor/sessions/api/start_question/', {
+            'questionId': questionId,
+            'sessionId': sessionId,
+            'runTime': runTime
+        }, function(response) {
+            uiToRunning();
+
+            // Start the countdown until the question starts
+            $('#seconds-until-start').text(response.time_offset);
+            $('#question-start-countdown').show();
+            var countdownInterval = setInterval(function() {
+                var val = $('#seconds-until-start').text();
+                val--;
+                $('#seconds-until-start').text(val);
+
+                if (val == 0) {
+                    clearInterval(countdownInterval);
+                    $('#question-start-countdown').fadeOut(function() {
+                        $('#question-progress-bars').fadeIn();
+                    });
+                    // This is where we call to start the countdown and polling for resposnses
+                    questionRunning();
+                }
+            }, 1000);
+        });
+    };
+
+    // This is where we start the progress bar and then start polling for responses
+    questionRunning = function() {
+        // Work out how often the progress bar width needs to be increased by 1% by
+        var progressBarDelay = (myRunTime * 1000) / 100;
+        var progressBarWidth = 0;
+        var progressBarInterval = setInterval(function() {
+            progressBarWidth++;
+            $('#time-remaining-progress .progress-bar').width(progressBarWidth + '%');
+
+            // Stop the progress bar once full
+            if (progressBarWidth == 100) {
+                clearInterval(progressBarInterval);
+            }
+        }, progressBarDelay);
+
+        // Count down in seconds on the display
+        var secondsRemaining = myRunTime;
+        $('#seconds-remaining').text(secondsRemaining);
+        var countdownInterval = setInterval(function() {
+            secondsRemaining--;
+            $('#seconds-remaining').text(secondsRemaining);
+
+            if (secondsRemaining == 0) {
+                clearInterval(countdownInterval);
+            }
+        }, 1000);
+    };
+
+    // This sets the UI for when a question is running
+    uiToRunning = function() {
+        // We now replace the "run a question" div with the "question running" div
+        $('#run-question').fadeOut(function() {
+            $('#question-running').fadeIn();
+        });
+    };
+}
+
+
+var runningSession = new RunningSession();
+
 $(document).ready(function() {
     // Submit the course selection form when the course in the drop down is changed
     $('#course-selection').change(function() {

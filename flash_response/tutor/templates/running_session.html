@@ -5,7 +5,7 @@
 
     <div class="alert alert-info"><strong>The response URL for this session is: </strong><a href="{{ response_url }}">{{ response_url }}</a></div>
 
-    <div class="panel panel-default">
+    <div id="run-question" class="panel panel-default">
         <div class="panel-heading">Run a question:</div>
         <div class="panel-body">
             <form class="form-inline" role="form">
@@ -24,6 +24,21 @@
                 seconds
                 <button class="btn btn-primary" id="start-question"><span class="glyphicon glyphicon-play"></span> Start Question</button>
             </form>
+        </div>
+    </div>
+
+    <div id="question-running">
+        <div class="panel panel-default">
+            <div class="panel-heading">Question Running</div>
+            <div class="panel-body">
+                <h3 id="question-start-countdown" style="text-align: center;"><span id="seconds-until-start"></span> seconds remaining until question starts</h3>
+                <div id="question-progress-bars">
+                    <h1 style="text-align: center;"><span id="seconds-remaining"></span> seconds remaining</h1>
+                    <div id="time-remaining-progress" class="progress">
+                        <div class="progress-bar" role="progressbar"></div>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
 {% endblock %}

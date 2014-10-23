@@ -1,11 +1,13 @@
 from django.shortcuts import render, render_to_response
 from main.decorators import user_is_tutor, tutor_course_is_selected
 from django.template import RequestContext
-from django.http import HttpResponseRedirect
-from main.models import Tutor_assignment, Tutor, Session, Question, Question_option
+from django.http import HttpResponse, HttpResponseRedirect
+from main.models import Tutor_assignment, Tutor, Session, Question, Question_option, Current_question
 from django.views.decorators.csrf import csrf_exempt
 from django.core.exceptions import ObjectDoesNotExist
 from tutor.helpers import *
+import json
+import datetime
 
 @user_is_tutor
 def welcome(request):
@@ -210,3 +212,41 @@ def run_session(request, session_id):
 
 
     return render_to_response('running_session.html', data, context_instance=RequestContext(request))
+
+@csrf_exempt
+@user_is_tutor
+@tutor_course_is_selected
+def api_start_question(request):
+    time_offset = 5; # This could possibly be moved into the database to allow the user to configure it
+
+    data = {}
+
+    # If this isn't a POST request, fail
+    if not request.method == 'POST':
+        return HttpResponse(json.dumps({'error': 'Request to API methods must be POST'}), content_type='application/json')
+
+    session_id = request.POST.get('sessionId')
+    question_id = request.POST.get('questionId')
+    run_time = request.POST.get('runTime')
+
+    # Check that the currently selected course owns this session and that the question
+    # is part of the session
+    if (Session.objects.filter(course_id=request.session['course_id'], pk=session_id) and
+        Question.objects.filter(session_id=session_id, pk=question_id)):
+        # Delete any existing question assignments for this session and insert our new one
+        # the return the timing data
+        Current_question.objects.filter(session_id=session_id).delete()
+        cq = Current_question()
+        cq.session_id = session_id
+        cq.question_id = question_id
+        cq.run_time = run_time
+        cq.start_time = datetime.datetime.now() + datetime.timedelta(0,time_offset) # 5 seconds from now
+        cq.save()
+
+        data['time_offset'] = time_offset
+        data['start_time'] = str(cq.start_time)
+        data['run_time'] = int(run_time)
+    else:
+        data['error'] = 'Session and/or question could not be found'
+
+    return HttpResponse(json.dumps(data), content_type='application/json')
