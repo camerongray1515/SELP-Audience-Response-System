@@ -22,7 +22,8 @@
                     <input type="text" value="30" id="question-time" class="form-control input-narrow">
                 </div>
                 seconds
-                <button class="btn btn-primary" id="start-question"><span class="glyphicon glyphicon-play"></span> Start Question</button>
+                <input type="hidden" id="session-id" value="{{ session.id }}">
+                <button type="button" class="btn btn-primary" id="start-question"><span class="glyphicon glyphicon-play"></span> Start Question</button>
             </form>
         </div>
     </div>

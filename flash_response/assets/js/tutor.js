@@ -95,6 +95,18 @@ function RunningSession() {
 
         });
     };
+
+    $(document).ready(function() {
+        $('#start-question').click(function() {
+            var questionId = $('#question').val();
+            var sessionId = $('#session-id').val();
+            var runTime = $('#question-time').val();
+
+            runningSession.startQuestion(questionId, sessionId, runTime);
+
+            return false;
+        });
+    });
 }
 
 
