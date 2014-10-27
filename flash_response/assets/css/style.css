@@ -1,3 +1,4 @@
+/* Global Styles */
 #content-container {
     margin-top: 70px;
     margin-left: 25px;
@@ -8,10 +9,15 @@ input.input-narrow {
     width: 50px !important;
 }
 
+/* Session Running */
 #question-running {
     display: none;
 }
 
 #question-progress-bars {
+    display: none;
+}
+
+#gathering-responses {
     display: none;
 }

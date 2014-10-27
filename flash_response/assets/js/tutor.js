@@ -64,8 +64,21 @@ function RunningSession() {
 
             if (secondsRemaining == 0) {
                 clearInterval(countdownInterval);
+                questionComplete();
             }
         }, 1000);
+    };
+
+    // This transitions from a running quesiton to calling the function to show the results
+    questionComplete = function() {
+        $('#question-countdown-container').fadeOut(function () {
+            $('#gathering-responses').fadeIn();
+        });
+
+        // Wait 3 seconds to allow any remaining results to come in and then transition the UI
+        setTimeout(function() {
+            uiToResults();
+        }, 3000);
     };
 
     // This sets the UI for when a question is running
@@ -73,6 +86,13 @@ function RunningSession() {
         // We now replace the "run a question" div with the "question running" div
         $('#run-question').fadeOut(function() {
             $('#question-running').fadeIn();
+        });
+    };
+
+    // This switches the UI to show the results for the previously run question
+    uiToResults = function() {
+        $('#question-running').fadeOut(function() {
+
         });
     };
 }
