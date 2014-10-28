@@ -16,8 +16,8 @@
         </div>
     </nav>
 
-    <script type="text/html" id="placeholder-question-option">
-        <button class="btn btn-primary btn-block btn-lg question-option-button" data-option-id="{{ option_id }}">{{ option_body }}</button>
+    <script type="text/html" id="template-question-option">
+        <button class="btn btn-primary btn-block btn-lg question-option-button" data-option-id="[# option_id #]">[# option_body #]</button>
     </script>
     <script type="text/javascript">var sessionCode = '{{ session.url_code }}';</script>
 
@@ -33,7 +33,7 @@
         </div>
         <div id="question-container">
             <div class="panel panel-default">
-                <div class="panel-heading"><h4></h4></div>
+                <div class="panel-heading"><h4 id="question-title"></h4></div>
                 <div class="panel-body" id="question-option-container"></div>
             </div>
         </div>
