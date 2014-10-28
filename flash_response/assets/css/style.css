@@ -9,6 +9,17 @@ input.input-narrow {
     width: 50px !important;
 }
 
+/* Global UI Stuff */
+div.spinner-large {
+    background-image: url(/static/img/spinner-large.gif);
+    width: 66px;
+    height: 66px;
+}
+
+.center-block {
+    margin: 0 auto;
+}
+
 /* Tutor - Session Running */
 #question-running {
     display: none;
