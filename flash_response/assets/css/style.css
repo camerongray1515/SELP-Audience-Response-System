@@ -9,7 +9,7 @@ input.input-narrow {
     width: 50px !important;
 }
 
-/* Session Running */
+/* Tutor - Session Running */
 #question-running {
     display: none;
 }
@@ -19,5 +19,10 @@ input.input-narrow {
 }
 
 #gathering-responses {
+    display: none;
+}
+
+/* Student - Session Running */
+#question-container {
     display: none;
 }

@@ -9,4 +9,7 @@ urlpatterns = patterns('',
     url(r'^admin/', include(admin.site.urls)),
     url(r'^login/', include('user_authentication.urls')),
     url(r'^tutor/', include('tutor.urls')),
+    url(r'^student/', include('student.urls')),
+   	# This must be kept last
+    url(r'^(?P<session_code>\w+)/$', 'student.views.respond'),
 )

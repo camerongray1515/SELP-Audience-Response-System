@@ -39,6 +39,7 @@ INSTALLED_APPS = (
     'main',
     'user_authentication',
     'tutor',
+    'student',
 )
 
 MIDDLEWARE_CLASSES = (
