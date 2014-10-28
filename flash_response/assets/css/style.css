@@ -9,6 +9,14 @@ input.input-narrow {
     width: 50px !important;
 }
 
+/* Extensions to Bootstrap Functionality */
+.progress-value {
+    position:absolute;
+    right:0;
+    left:0;
+    text-align: center;
+}
+
 /* Global UI Stuff */
 div.spinner-large {
     background-image: url(/static/img/spinner-large.gif);

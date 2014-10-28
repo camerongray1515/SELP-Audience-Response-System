@@ -17,7 +17,7 @@
     </nav>
 
     <script type="text/html" id="template-question-option">
-        <button class="btn btn-primary btn-block btn-lg question-option-button" data-option-id="[# option_id #]">[# option_body #]</button>
+        <button class="btn btn-primary btn-block btn-lg question-option-button" data-option-id="[# option_id #]"><h3>[# option_body #]</h3></button>
     </script>
     <script type="text/javascript">var sessionCode = '{{ session.url_code }}';</script>
 
@@ -32,6 +32,12 @@
             </div>
         </div>
         <div id="question-container">
+            <div id="response-progress-bars">
+                <div id="time-remaining-progress" class="progress">
+                    <span class="progress-value"><span id="seconds-remaining"></span> seconds remaining</span>
+                    <div class="progress-bar" role="progressbar"></div>
+                </div>
+            </div>      
             <div class="panel panel-default">
                 <div class="panel-heading"><h4 id="question-title"></h4></div>
                 <div class="panel-body" id="question-option-container"></div>
