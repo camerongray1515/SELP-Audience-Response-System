@@ -54,5 +54,6 @@ def check_question_availability(request):
             data['time_to_start'] = time_to_start
             data['question_body'] = newest_assignment.question.question_body
             data['question_options'] = question_options
+            data['run_time'] = newest_assignment.run_time
 
     return HttpResponse(json.dumps(data), content_type='application/json')

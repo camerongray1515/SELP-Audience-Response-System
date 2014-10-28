@@ -28,8 +28,51 @@ function RunningSesson(sessionCode) {
         };
         $('#wait-container').fadeOut(function() {
             $('#question-container').fadeIn();
+            startQuestionTimer(question.run_time);
         });
     };
+
+    startQuestionTimer = function(runTime) {
+        var progressBarDelay = (runTime * 1000) / 100;
+        var progressBarWidth = 0;
+        var progressBarInterval = setInterval(function() {
+            progressBarWidth++;
+            $('#time-remaining-progress .progress-bar').width(progressBarWidth + '%');
+
+            // Stop the progress bar once full
+            if (progressBarWidth == 100) {
+                clearInterval(progressBarInterval);
+            }
+        }, progressBarDelay);
+
+        // Count down in seconds on the display
+        var secondsRemaining = runTime;
+        $('#seconds-remaining').text(secondsRemaining);
+        var _this = this;
+        var countdownInterval = setInterval(function() {
+            secondsRemaining--;
+            $('#seconds-remaining').text(secondsRemaining);
+
+            if (secondsRemaining == 0) {
+                clearInterval(countdownInterval);
+                questionComplete(_this);
+            }
+        }, 1000);
+    };
+
+    questionComplete = function(_this) {
+        uiToWaiting();
+        runningSession.checkForQuestions();
+    };
+
+    uiToWaiting = function() {
+        $('#time-remaining-progress .progress-bar').css('width', '0px');
+        $('#question-container').fadeOut(function() {
+            $('#wait-container').fadeIn();
+        });
+    };
+
+    this.checkForQuestions();
 }
 
 var runningSession = new RunningSesson(sessionCode);
