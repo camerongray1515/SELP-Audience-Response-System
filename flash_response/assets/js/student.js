@@ -48,19 +48,23 @@ function RunningSesson(sessionCode) {
         // Count down in seconds on the display
         var secondsRemaining = runTime;
         $('#seconds-remaining').text(secondsRemaining);
-        var _this = this;
         var countdownInterval = setInterval(function() {
             secondsRemaining--;
             $('#seconds-remaining').text(secondsRemaining);
 
             if (secondsRemaining == 0) {
                 clearInterval(countdownInterval);
-                questionComplete(_this);
+                questionComplete();
             }
         }, 1000);
     };
 
-    questionComplete = function(_this) {
+    transmitResponse = function() {
+        console.log('Response would be transmitted at this point');
+    };
+
+
+    questionComplete = function() {
         uiToWaiting();
         runningSession.checkForQuestions();
     };
@@ -77,6 +81,12 @@ function RunningSesson(sessionCode) {
             $('#response-transmitted-container').fadeIn();
         });
     };
+
+    // Binding for question options being clicked
+    $(document).on('click', '.question-option-button', function() {
+        uiToResponseTransmitted();
+        transmitResponse();
+    });
 
     this.checkForQuestions();
 }
