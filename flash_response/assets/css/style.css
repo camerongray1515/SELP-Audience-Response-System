@@ -45,3 +45,7 @@ div.spinner-large {
 #question-container {
     display: none;
 }
+
+#response-transmitted-container {
+    display: none;
+}

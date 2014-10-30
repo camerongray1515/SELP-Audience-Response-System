@@ -67,8 +67,14 @@ function RunningSesson(sessionCode) {
 
     uiToWaiting = function() {
         $('#time-remaining-progress .progress-bar').css('width', '0px');
-        $('#question-container').fadeOut(function() {
+        $('#question-container:visible, #response-transmitted-container:visible').fadeOut(function() {
             $('#wait-container').fadeIn();
+        });
+    };
+
+    uiToResponseTransmitted = function() {
+        $('#question-container:visible').fadeOut(function() {
+            $('#response-transmitted-container').fadeIn();
         });
     };
 
