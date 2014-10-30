@@ -59,8 +59,9 @@ function RunningSesson(sessionCode) {
         }, 1000);
     };
 
-    transmitResponse = function() {
+    transmitResponse = function(option_id) {
         console.log('Response would be transmitted at this point');
+        console.log(option_id);
     };
 
 
@@ -85,7 +86,9 @@ function RunningSesson(sessionCode) {
     // Binding for question options being clicked
     $(document).on('click', '.question-option-button', function() {
         uiToResponseTransmitted();
-        transmitResponse();
+
+        var option_id = $(this).attr('data-option-id');
+        transmitResponse(option_id);
     });
 
     this.checkForQuestions();
