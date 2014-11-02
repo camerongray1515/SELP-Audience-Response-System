@@ -59,9 +59,11 @@ function RunningSesson(sessionCode) {
         }, 1000);
     };
 
-    transmitResponse = function(option_id) {
-        console.log('Response would be transmitted at this point');
-        console.log(option_id);
+    transmitResponse = function(optionId) {
+        $.post('/student/log_response/', {
+            'option_id': optionId,
+            'sessionCode': this.sessionCode
+        });
     };
 
 
