@@ -2,7 +2,7 @@ from django.shortcuts import render, render_to_response
 from main.decorators import user_is_tutor, tutor_course_is_selected
 from django.template import RequestContext
 from django.http import HttpResponse, HttpResponseRedirect
-from main.models import Tutor_assignment, Tutor, Session, Question, Question_option, Current_question
+from main.models import Tutor_assignment, Tutor, Session, Question, Question_option, Current_question, Student_response
 from django.views.decorators.csrf import csrf_exempt
 from django.core.exceptions import ObjectDoesNotExist
 from tutor.helpers import *
@@ -242,6 +242,9 @@ def api_start_question(request):
         cq.run_time = run_time
         cq.start_time = datetime.datetime.now() + datetime.timedelta(0,time_offset) # 5 seconds from now
         cq.save()
+
+        # Remove any responses stored against this question
+        Student_response.objects.filter(option__question_id=question_id).delete()
 
         data['time_offset'] = time_offset
         data['start_time'] = str(cq.start_time)
