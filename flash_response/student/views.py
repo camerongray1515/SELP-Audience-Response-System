@@ -2,10 +2,11 @@ from django.shortcuts import render, render_to_response
 from main.decorators import user_is_student
 from django.http import HttpResponse, HttpResponseRedirect
 from django.http import Http404
-from main.models import Session, Current_question, Question_option, Student_response
+from main.models import Session, Current_question, Question_option, Student_response, Enrollment, Student
 from django.core.exceptions import ObjectDoesNotExist
 from django.template import RequestContext
 from django.utils import timezone
+from django.views.decorators.csrf import csrf_exempt
 
 import json
 import datetime
@@ -58,21 +59,24 @@ def check_question_availability(request):
 
     return HttpResponse(json.dumps(data), content_type='application/json')
 
+@csrf_exempt
 @user_is_student
 def log_response(request):
-    if request.method != 'GET':
+    if request.method != 'POST':
         raise Http404
 
-    session_code = request.GET.get('session_code')
-    option_id = request.GET.get('option_id')
+    session_code = request.POST.get('sessionCode')
+    option_id = request.POST.get('optionId')
 
     data = {'success': True, 'message': 'Response has been collected successfully'}
 
     # We must now do some strict checking to ensure that the user is allowed to
     # answer this question and if all that passes, we insert the response
     try:
+        pass
         # User must be allowed to access this session and session must be active
-        session = Session.objects.get(url_code=session_code, course__enrollment__student__user=request.user, running=True)
+        session = Session.objects.get(url_code=session_code, running=True)
+        enrollment = Enrollment.objects.get(course=session.course, student__user=request.user)
         # This option must be part of the current and the question must be active
         option = Question_option.objects.get(pk=option_id)
         current_question = Current_question.objects.filter(session=session, question=option.question).order_by('-start_time')
