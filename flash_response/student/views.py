@@ -2,7 +2,7 @@ from django.shortcuts import render, render_to_response
 from main.decorators import user_is_student
 from django.http import HttpResponse, HttpResponseRedirect
 from django.http import Http404
-from main.models import Session, Current_question, Question_option
+from main.models import Session, Current_question, Question_option, Student_response
 from django.core.exceptions import ObjectDoesNotExist
 from django.template import RequestContext
 from django.utils import timezone
@@ -91,7 +91,16 @@ def log_response(request):
             data['success'] = False
             data['message'] = 'This question has expired'
         else:
-            pass
-            # Insert the response
+            # Only insert an answer if this student hasn't already responded
+            # This should never happen during normal operation however it will
+            # protect against users deliberately trying to break the system
+            option = Question_option.objects.get(pk=option_id)
+            already_responded = bool(Student_response.objects.filter(student__user=request.user, option=option))
+            if not already_responded:
+                student = Student.objects.get(user=request.user)
+                sr = Student_response()
+                sr.student = student
+                sr.option_id = option_id
+                sr.save()
 
     return HttpResponse(json.dumps(data), content_type='application/json')
