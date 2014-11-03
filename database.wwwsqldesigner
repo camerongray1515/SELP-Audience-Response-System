@@ -37,7 +37,7 @@
 		<type label="SET" length="1" sql="SET" quote=""/>
 		<type label="Bit" length="0" sql="bit" quote=""/>
 	</group>
-</datatypes><table x="91" y="337" name="users">
+</datatypes><table x="317" y="213" name="users">
 <row name="django_predefined_fields" null="1" autoincrement="1">
 <datatype>TINYINT</datatype>
 <default>NULL</default></row>
@@ -45,31 +45,7 @@
 <part>django_predefined_fields</part>
 </key>
 </table>
-<table x="430" y="188" name="tutors">
-<row name="id" null="1" autoincrement="1">
-<datatype>TINYINT</datatype>
-<default>NULL</default></row>
-<row name="user" null="1" autoincrement="0">
-<datatype>TINYINT</datatype>
-<default>NULL</default><relation table="users" row="django_predefined_fields" />
-</row>
-<key type="PRIMARY" name="">
-<part>id</part>
-</key>
-</table>
-<table x="426" y="492" name="students">
-<row name="id" null="1" autoincrement="1">
-<datatype>TINYINT</datatype>
-<default>NULL</default></row>
-<row name="user" null="1" autoincrement="0">
-<datatype>TINYINT</datatype>
-<default>NULL</default><relation table="users" row="django_predefined_fields" />
-</row>
-<key type="PRIMARY" name="">
-<part>id</part>
-</key>
-</table>
-<table x="424" y="328" name="courses">
+<table x="573" y="333" name="courses">
 <row name="id" null="1" autoincrement="1">
 <datatype>TINYINT</datatype>
 <default>NULL</default></row>
@@ -83,22 +59,10 @@
 <part>id</part>
 </key>
 </table>
-<table x="723" y="490" name="enrollment">
-<row name="course" null="1" autoincrement="0">
+<table x="625" y="159" name="tutor_assignment">
+<row name="user" null="1" autoincrement="0">
 <datatype>TINYINT</datatype>
-<default>NULL</default><relation table="courses" row="id" />
-</row>
-<row name="student" null="1" autoincrement="0">
-<datatype>TINYINT</datatype>
-<default>NULL</default><relation table="students" row="id" />
-</row>
-<key type="PRIMARY" name="">
-</key>
-</table>
-<table x="631" y="145" name="tutor_assignment">
-<row name="tutor" null="1" autoincrement="0">
-<datatype>TINYINT</datatype>
-<default>NULL</default><relation table="tutors" row="id" />
+<default>NULL</default><relation table="users" row="django_predefined_fields" />
 </row>
 <row name="course" null="1" autoincrement="0">
 <datatype>TINYINT</datatype>
@@ -161,10 +125,10 @@
 <part>id</part>
 </key>
 </table>
-<table x="774" y="597" name="student_responses">
-<row name="student" null="1" autoincrement="0">
+<table x="794" y="598" name="student_responses">
+<row name="session_run" null="1" autoincrement="0">
 <datatype>TINYINT</datatype>
-<default>NULL</default><relation table="students" row="id" />
+<default>NULL</default><relation table="session_runs" row="id" />
 </row>
 <row name="option" null="1" autoincrement="0">
 <datatype>TINYINT</datatype>
@@ -189,6 +153,21 @@
 <datatype>SMALLINT</datatype>
 <default>NULL</default></row>
 <key type="PRIMARY" name="">
+</key>
+</table>
+<table x="882" y="432" name="session_runs">
+<row name="id" null="1" autoincrement="1">
+<datatype>TINYINT</datatype>
+<default>NULL</default></row>
+<row name="session" null="1" autoincrement="0">
+<datatype>TINYINT</datatype>
+<default>NULL</default><relation table="sessions" row="id" />
+</row>
+<row name="start_time" null="1" autoincrement="0">
+<datatype>TIMESTAMP</datatype>
+<default>NULL</default></row>
+<key type="PRIMARY" name="">
+<part>id</part>
 </key>
 </table>
 </sql>
