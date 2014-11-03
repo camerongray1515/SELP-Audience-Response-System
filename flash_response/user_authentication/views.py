@@ -16,7 +16,7 @@ def login_form(request):
         user = authenticate(username=username, password=password)
 
         if user is not None:
-            if user.is_active and is_in_realm:
+            if user.is_active:
                 login(request, user)
                 data['login_error'] = False;
 
