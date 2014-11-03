@@ -1,5 +1,6 @@
 from django.shortcuts import render, render_to_response
-from main.decorators import user_is_tutor, tutor_course_is_selected
+from main.decorators import tutor_course_is_selected
+from django.contrib.auth.decorators import login_required
 from django.template import RequestContext
 from django.http import HttpResponse, HttpResponseRedirect
 from main.models import Tutor_assignment, Tutor, Session, Question, Question_option, Current_question, Student_response
@@ -9,12 +10,12 @@ from tutor.helpers import *
 import json
 import datetime
 
-@user_is_tutor
+@login_required
 def welcome(request):
     return render_to_response('welcome.html', context_instance=RequestContext(request))
 
 @csrf_exempt
-@user_is_tutor
+@login_required
 def select_course(request):
     course_id = int(request.POST['course'])
 
@@ -32,7 +33,7 @@ def select_course(request):
     request.session['course_id'] = course_id
     return HttpResponseRedirect('/tutor/')
 
-@user_is_tutor
+@login_required
 @tutor_course_is_selected
 def sessions(request):
     data = {}
@@ -41,7 +42,7 @@ def sessions(request):
 
     return render_to_response('sessions.html', data, context_instance=RequestContext(request))
 
-@user_is_tutor
+@login_required
 @tutor_course_is_selected
 def new_session(request):
     data = {}
@@ -65,7 +66,7 @@ def new_session(request):
 
     return render_to_response('new_session.html', data, context_instance=RequestContext(request))
 
-@user_is_tutor
+@login_required
 @tutor_course_is_selected
 def edit_session(request, session_id):
     data = {}
@@ -93,7 +94,7 @@ def edit_session(request, session_id):
 
     return render_to_response('edit_session.html', data, context_instance=RequestContext(request))
 
-@user_is_tutor
+@login_required
 @tutor_course_is_selected
 def edit_question(request, session_id, question_id):
     data = {'type': 'edit'}
@@ -143,7 +144,7 @@ def edit_question(request, session_id, question_id):
 
     return render_to_response('question_form.html', data, context_instance=RequestContext(request))
 
-@user_is_tutor
+@login_required
 @tutor_course_is_selected
 def new_question(request, session_id):
     data = {'type': 'new'}
@@ -182,7 +183,7 @@ def new_question(request, session_id):
 
     return render_to_response('question_form.html', data, context_instance=RequestContext(request))
 
-@user_is_tutor
+@login_required
 @tutor_course_is_selected
 def run_session(request, session_id):
     data = {}
@@ -214,7 +215,7 @@ def run_session(request, session_id):
     return render_to_response('running_session.html', data, context_instance=RequestContext(request))
 
 @csrf_exempt
-@user_is_tutor
+@login_required
 @tutor_course_is_selected
 def api_start_question(request):
     time_offset = 5; # This could possibly be moved into the database to allow the user to configure it

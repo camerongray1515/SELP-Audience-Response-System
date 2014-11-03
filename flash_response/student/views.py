@@ -1,5 +1,4 @@
 from django.shortcuts import render, render_to_response
-from main.decorators import user_is_student
 from django.http import HttpResponse, HttpResponseRedirect
 from django.http import Http404
 from main.models import Session, Current_question, Question_option, Student_response, Enrollment, Student
@@ -12,7 +11,6 @@ import json
 import datetime
 import random
 
-@user_is_student
 def respond(request, session_code):
     # If a session exists, go to the response page, otherwise throw a 404
     try:
@@ -26,7 +24,6 @@ def respond(request, session_code):
 
     return render_to_response('response.html', data, context_instance=RequestContext(request))
 
-@user_is_student
 def check_question_availability(request):
     session_code = request.GET.get('session_code')
 
@@ -60,7 +57,6 @@ def check_question_availability(request):
     return HttpResponse(json.dumps(data), content_type='application/json')
 
 @csrf_exempt
-@user_is_student
 def log_response(request):
     if request.method != 'POST':
         raise Http404
