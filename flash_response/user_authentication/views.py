@@ -4,13 +4,8 @@ from django.contrib.auth import authenticate, login, logout
 from main.models import Student, Tutor
 from django.http import HttpResponseRedirect
 
-def login_main(request):
-    return render_to_response('login_main.html')
-
-def login_form(request, realm):
-    data = {
-        'realm': realm,
-    }
+def login_form(request):
+    data = {}
     data.update(csrf(request))
 
     # Has the form been submitted?
@@ -22,19 +17,11 @@ def login_form(request, realm):
         user = authenticate(username=username, password=password)
 
         if user is not None:
-            # Is this user part of the realm we are using?
-            if realm == 'student':
-                is_in_realm = Student.objects.filter(user=user).count()
-            elif realm == 'tutor':
-                is_in_realm = Tutor.objects.filter(user=user).count()
-            else:
-                raise Exception('Invalid realm specified!')
-
             if user.is_active and is_in_realm:
                 login(request, user)
                 data['login_error'] = False;
 
-                return HttpResponseRedirect('/{0}/'.format(realm))
+                return HttpResponseRedirect('/tutor/'.format(realm))
 
     return render_to_response('login_form.html', data);
 
