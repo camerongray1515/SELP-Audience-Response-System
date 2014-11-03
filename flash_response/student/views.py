@@ -90,6 +90,7 @@ def log_response(request):
             data['success'] = False
             data['message'] = 'This question has expired'
         else:
+            # TODO: Allow people to change their response
             option = Question_option.objects.get(pk=option_id)
             session_run = Session_run.objects.filter(session=session).order_by('-start_time')[0]
             response = Student_response()
