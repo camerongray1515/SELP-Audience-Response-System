@@ -20,7 +20,7 @@ def login_form(request):
                 login(request, user)
                 data['login_error'] = False;
 
-                return HttpResponseRedirect('/tutor/'.format(realm))
+                return HttpResponseRedirect('/tutor/')
 
     return render_to_response('login_form.html', data);
 
