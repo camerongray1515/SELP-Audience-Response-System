@@ -1,7 +1,6 @@
 from django.shortcuts import render, render_to_response
 from django.core.context_processors import csrf
 from django.contrib.auth import authenticate, login, logout
-from main.models import Student, Tutor
 from django.http import HttpResponseRedirect
 
 def login_form(request):
