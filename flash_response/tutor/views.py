@@ -201,7 +201,10 @@ def run_session(request, session_id):
         data['error'] = 'You cannot launch a session that does not contain any questions'
         return render_to_response('error.html', data, context_instance=RequestContext(request))
 
-    if not s.running:
+    resume = request.GET.get('resume')
+
+    # Only create a new session if we are not resuming or the session is inactive
+    if not resume or not s.running:
         Session.objects.filter(course=request.session['course_id']).exclude(pk=session_id).update(running=False)
         s.running = True
         s.url_code = generate_session_url_code()
