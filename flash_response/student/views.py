@@ -1,7 +1,7 @@
 from django.shortcuts import render, render_to_response
 from django.http import HttpResponse, HttpResponseRedirect
 from django.http import Http404
-from main.models import Session, Current_question, Question_option, Student_response, Enrollment, Student
+from main.models import Session, Current_question, Question_option, Student_response, Student
 from django.core.exceptions import ObjectDoesNotExist
 from django.template import RequestContext
 from django.utils import timezone
@@ -14,7 +14,7 @@ import random
 def respond(request, session_code):
     # If a session exists, go to the response page, otherwise throw a 404
     try:
-        s = Session.objects.get(url_code=session_code, course__enrollment__student__user=request.user, running=True)
+        s = Session.objects.get(url_code=session_code, running=True)
     except ObjectDoesNotExist:
         raise Http404
 
@@ -29,7 +29,7 @@ def check_question_availability(request):
 
     # Check if the session exists and that the student is allowed to access it
     try:
-        s = Session.objects.get(url_code=session_code, course__enrollment__student__user=request.user, running=True)
+        s = Session.objects.get(url_code=session_code, running=True)
     except ObjectDoesNotExist:
         raise Http404
 
@@ -72,7 +72,6 @@ def log_response(request):
         pass
         # User must be allowed to access this session and session must be active
         session = Session.objects.get(url_code=session_code, running=True)
-        enrollment = Enrollment.objects.get(course=session.course, student__user=request.user)
         # This option must be part of the current and the question must be active
         option = Question_option.objects.get(pk=option_id)
         current_question = Current_question.objects.filter(session=session, question=option.question).order_by('-start_time')
