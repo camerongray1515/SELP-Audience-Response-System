@@ -68,12 +68,19 @@ function RunningSesson(sessionCode) {
 
 
     questionComplete = function() {
+        resetQuestionArea();
         uiToWaiting();
         runningSession.checkForQuestions();
     };
 
-    uiToWaiting = function() {
+    resetQuestionArea = function() {
+        // Remove all question buttons
+        $('.question-option-button').remove();
+        // Reset the progress bar to zero
         $('#time-remaining-progress .progress-bar').css('width', '0px');
+    };
+
+    uiToWaiting = function() {
         $('#question-container:visible, #response-transmitted-container:visible').fadeOut(function() {
             $('#wait-container').fadeIn();
         });
