@@ -3,7 +3,7 @@ from main.decorators import tutor_course_is_selected
 from django.contrib.auth.decorators import login_required
 from django.template import RequestContext
 from django.http import HttpResponse, HttpResponseRedirect
-from main.models import Tutor_assignment, Tutor, Session, Question, Question_option, Current_question, Student_response
+from main.models import Tutor_assignment, Session, Question, Question_option, Current_question, Student_response
 from django.views.decorators.csrf import csrf_exempt
 from django.core.exceptions import ObjectDoesNotExist
 from tutor.helpers import *
@@ -20,8 +20,7 @@ def select_course(request):
     course_id = int(request.POST['course'])
 
     # We first must check if the tutor is actually assigned to this course
-    tutor = Tutor.objects.get(user=request.user)
-    assignments = Tutor_assignment.objects.filter(tutor=tutor, course_id=course_id)
+    assignments = Tutor_assignment.objects.filter(user=request.user, course_id=course_id)
 
     # Could throw a pretty error here but in this should never happen in normal use of
     # the application
