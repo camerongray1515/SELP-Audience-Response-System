@@ -56,7 +56,7 @@ class Current_question(models.Model):
         return "Session: {0}".format(self.session.title)
 
 
-class Session_run:
+class Session_run(models.Model):
     session = models.ForeignKey(Session)
     start_time = models.DateTimeField(auto_now_add=True)
 
@@ -66,7 +66,8 @@ class Session_run:
 
 # This model stores which question option was picked by a student
 class Student_response(models.Model):
+    session_run = models.ForeignKey(Session_run)
     option = models.ForeignKey(Question_option)
 
     def __str__(self):
-        return "Student: {0}, Option: {1}".format(self.student.user.username, self.option.body)
+        return "Option: {0}, Session Run: {1}".format(self.option.body, self.session_run.id)

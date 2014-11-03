@@ -3,7 +3,7 @@ from main.decorators import tutor_course_is_selected
 from django.contrib.auth.decorators import login_required
 from django.template import RequestContext
 from django.http import HttpResponse, HttpResponseRedirect
-from main.models import Tutor_assignment, Session, Question, Question_option, Current_question, Student_response
+from main.models import Tutor_assignment, Session, Question, Question_option, Current_question, Student_response, Session_run
 from django.views.decorators.csrf import csrf_exempt
 from django.core.exceptions import ObjectDoesNotExist
 from tutor.helpers import *
@@ -207,6 +207,12 @@ def run_session(request, session_id):
         s.url_code = generate_session_url_code()
         s.save()
 
+        # Insert session run
+        run = Session_run()
+        run.session = s
+        run.save()
+
+
     data['session'] = s
     data['response_url'] = build_url(request, s.url_code)
 
@@ -243,8 +249,9 @@ def api_start_question(request):
         cq.start_time = datetime.datetime.now() + datetime.timedelta(0,time_offset) # 5 seconds from now
         cq.save()
 
-        # Remove any responses stored against this question
-        Student_response.objects.filter(option__question_id=question_id).delete()
+        # Remove any responses stored against this question in the current session run
+        session_run = Session_run.objects.filter(session=session_id).order_by('-start_time')[0]
+        Student_response.objects.filter(option__question_id=question_id, session_run=session_run).delete()
 
         data['time_offset'] = time_offset
         data['start_time'] = str(cq.start_time)

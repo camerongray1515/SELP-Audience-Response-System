@@ -1,7 +1,7 @@
 from django.shortcuts import render, render_to_response
 from django.http import HttpResponse, HttpResponseRedirect
 from django.http import Http404
-from main.models import Session, Current_question, Question_option, Student_response
+from main.models import Session, Current_question, Question_option, Student_response, Session_run
 from django.core.exceptions import ObjectDoesNotExist
 from django.template import RequestContext
 from django.utils import timezone
@@ -90,15 +90,11 @@ def log_response(request):
             data['success'] = False
             data['message'] = 'This question has expired'
         else:
-            # Only insert an answer if this student hasn't already responded
-            # This should never happen during normal operation however it will
-            # protect against users deliberately trying to break the system
             option = Question_option.objects.get(pk=option_id)
-            # Todo: Fix this to handle session_runs and allow the user to change their choice
-            # already_responded = bool(Student_response.objects.filter(student__user=request.user, option=option))
-            # if not already_responded:
-            #     sr = Student_response()
-            #     sr.option_id = option_id
-            #     sr.save()
+            session_run = Session_run.objects.filter(session=session).order_by('-start_time')[0]
+            response = Student_response()
+            response.option = option
+            response.session_run = session_run
+            response.save()
 
     return HttpResponse(json.dumps(data), content_type='application/json')

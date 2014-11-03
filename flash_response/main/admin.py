@@ -28,3 +28,7 @@ class Current_question_admin(admin.ModelAdmin):
 @admin.register(Student_response)
 class Student_response_admin(admin.ModelAdmin):
     pass
+
+@admin.register(Session_run)
+class Session_run_admin(admin.ModelAdmin):
+    pass
