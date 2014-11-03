@@ -15,7 +15,7 @@ class Tutor_assignment(models.Model):
     course = models.ForeignKey(Course)
 
     def __str__(self):
-        return "User: {0}, Course: {1}".format(self.tutor.user.username, self.course.title)
+        return "User: {0}, Course: {1}".format(self.user.username, self.course.title)
 
 # This model stores individual sessions (lectures/lessons) of each course
 class Session(models.Model):
