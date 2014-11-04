@@ -215,9 +215,12 @@ def run_session(request, session_id):
         run = Session_run()
         run.session = s
         run.save()
+    else:
+        run = Session_run.objects.order_by('-start_time')[0]
 
 
     data['session'] = s
+    data['session_run'] = run
     data['response_url'] = build_url(request, s.url_code)
 
 

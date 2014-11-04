@@ -2,6 +2,7 @@ function RunningSession() {
     var myQuestionId = 0;
     var mySessionId = 0;
     var myRunTime = 0;
+    var mySessionRunId;
 
     this.startQuestion = function(questionId, sessionId, runTime) {
         // Send a request to the server to start the question.  The server will then respond
@@ -92,11 +93,12 @@ function RunningSession() {
     // This switches the UI to show the results for the previously run question
     uiToResults = function() {
         $('#question-running').fadeOut(function() {
-
+            statistics.makeQuestionTotalsChart(myQuestionId, mySessionRunId, '#result-chart');
         });
     };
 
     $(document).ready(function() {
+        mySessionRunId = $('#session-run-id').val();
         $('#start-question').click(function() {
             var questionId = $('#question').val();
             var sessionId = $('#session-id').val();
