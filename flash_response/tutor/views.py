@@ -7,6 +7,7 @@ from main.models import Tutor_assignment, Session, Question, Question_option, Cu
 from django.views.decorators.csrf import csrf_exempt
 from django.core.exceptions import ObjectDoesNotExist
 from tutor.helpers import *
+from tutor.statistics import Statistics
 import json
 import datetime
 
@@ -263,3 +264,26 @@ def api_start_question(request):
         data['error'] = 'Session and/or question could not be found'
 
     return HttpResponse(json.dumps(data), content_type='application/json')
+
+@login_required
+@tutor_course_is_selected
+def api_get_question_totals(request):
+    # If this isn't a POST request, fail
+    if not request.method == 'POST':
+        return HttpResponse(json.dumps({'error': 'Request to API methods must be POST'}), content_type='application/json')
+
+    question_id = request.POST.get('questionId')
+    session_run_id = request.POST.get('sessionRunId')
+
+    # Check user is allowed to access this session_run
+    try:
+        session_run = Session_run.objects.get(pk=session_run_id, session__course=request.session['course_id'])
+    except ObjectDoesNotExist:
+        return HttpResponse(json.dumps({'error': 'You do not have permission to access this session run'}), content_type='application/json')
+
+    data = {}
+    s = Statistics()
+    data['question_totals'] = s.get_question_totals(question_id, session_run_id)
+
+    return HttpResponse(json.dumps(data), content_type='application/json')
+    

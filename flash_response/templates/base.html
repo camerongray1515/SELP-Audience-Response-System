@@ -12,6 +12,7 @@
 	    <link href="{% static 'css/bootstrap.min.css' %}" rel="stylesheet">
 	    <!-- Application core CSS -->
 	    <link href="{% static 'css/style.css' %}" rel="stylesheet">
+        {% block additional_stylesheets %}{% endblock %}
   </head>
   <body> 
   	{% block body %}{% endblock %}

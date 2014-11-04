@@ -10,7 +10,8 @@ class Statistics():
         option_totals = {}
         for option in options:
             totals_entry = {
-                'option': option,
+                'option_body': option.body,
+                'option_correct': option.correct,
                 'count': 0
             }
 

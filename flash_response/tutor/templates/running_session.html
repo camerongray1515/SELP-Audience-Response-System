@@ -1,4 +1,9 @@
 {% extends "tutor_base.html" %}
+{% load staticfiles %}
+
+{% block additional_stylesheets %}
+    <link rel="stylesheet" type="text/css" href="{% static 'css/jchart.css' %}">
+{% endblock %}
 
 {% block content %}
     <h2>Session Running</h2>
@@ -48,4 +53,18 @@
             </div>
         </div>
     </div>
+
+    <div id="question-results">
+        <div class="panel panel-default">
+            <div class="panel-heading">Question Results</div>
+            <div class="panel-body">
+                <div id="result-chart"></div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
+
+{% block additional_js_includes %}
+    {{ block.super }}
+    <script src="{% static 'js/jchart.js' %}"></script>
 {% endblock %}
