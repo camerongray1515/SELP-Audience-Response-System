@@ -108,9 +108,41 @@ function RunningSession() {
         });
     });
 }
-
-
 var runningSession = new RunningSession();
+
+
+function Statistics() {
+    this.makeQuestionTotalsChart = function(questionId, sessionRunId, chartSelector) {
+        // Request the data from the server, transform it into jChart format
+        // and then create the chart using jChart on the provided selector
+        $.post('/tutor/sessions/api/get_question_totals/', {
+            'questionId': questionId,
+            'sessionRunId': sessionRunId
+        }, function(data) {
+            // Build basic structure with empty arrays to populate later
+            var jChartData = {
+                'name': "Results for this question",
+                'headers': [],
+                'values': [],
+                'footers': [],
+                'colors': []
+            };
+
+            // Go through each option and add it to the jChart arrays
+            for (option_id in data['question_totals']) {
+                var option = data['question_totals'][option_id]
+                jChartData['headers'].push(option.option_body);
+                jChartData['values'].push(option.count);
+
+                var option_colour = (option.option_correct) ? 'green' : 'red';
+                jChartData['colors'].push(option_colour);
+            }
+
+            $(chartSelector).jChart(jChartData);
+        });
+    };
+}
+var statistics = new Statistics();
 
 $(document).ready(function() {
     // Submit the course selection form when the course in the drop down is changed

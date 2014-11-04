@@ -266,6 +266,7 @@ def api_start_question(request):
     return HttpResponse(json.dumps(data), content_type='application/json')
 
 @login_required
+@csrf_exempt
 @tutor_course_is_selected
 def api_get_question_totals(request):
     # If this isn't a POST request, fail
@@ -286,4 +287,3 @@ def api_get_question_totals(request):
     data['question_totals'] = s.get_question_totals(question_id, session_run_id)
 
     return HttpResponse(json.dumps(data), content_type='application/json')
-    
