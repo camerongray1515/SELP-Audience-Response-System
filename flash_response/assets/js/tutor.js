@@ -82,11 +82,21 @@ function RunningSession() {
         }, 3000);
     };
 
+    // This resets the hide/show status of parts of the question running container
+    // ready for the next question to run
+    resetQuestionRunningContainer = function() {
+        $('#gathering-responses').hide();
+        $('#question-progress-bars').hide();
+        $('#question-start-countdown').show();
+        $('#question-countdown-container').show();
+    }
+
     // This sets the UI for when a question is running
     uiToRunning = function() {
         // We now replace the "run a question" div with the "question running" div
         $('#question-results:visible').fadeOut();
         $('#run-question').fadeOut(function() {
+            resetQuestionRunningContainer();
             $('#question-running').fadeIn();
         });
     };
