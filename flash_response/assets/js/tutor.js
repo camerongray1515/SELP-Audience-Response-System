@@ -85,6 +85,7 @@ function RunningSession() {
     // This sets the UI for when a question is running
     uiToRunning = function() {
         // We now replace the "run a question" div with the "question running" div
+        $('#question-results:visible').fadeOut();
         $('#run-question').fadeOut(function() {
             $('#question-running').fadeIn();
         });
@@ -93,6 +94,8 @@ function RunningSession() {
     // This switches the UI to show the results for the previously run question
     uiToResults = function() {
         $('#question-running').fadeOut(function() {
+            $('#run-question').fadeIn();
+            $('#question-results').fadeIn();
             statistics.makeQuestionTotalsChart(myQuestionId, mySessionRunId, '#result-chart');
         });
     };

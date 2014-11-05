@@ -41,6 +41,10 @@ div.spinner-large {
     display: none;
 }
 
+#question-results {
+    display: none;
+}
+
 /* Student - Session Running */
 #question-container {
     display: none;
