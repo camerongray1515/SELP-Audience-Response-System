@@ -64,4 +64,4 @@ class TestSesson(TestCase):
 
         response = self.client.post('/tutor/sessions/2/questions/add/', question_data, follow=True)
 
-        self.assertContains(response, '"max-options" option was missing from your request')
+        self.assertContains(response, '&quot;max-options&quot; option was missing from your request')
