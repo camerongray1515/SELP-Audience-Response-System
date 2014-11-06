@@ -15,3 +15,9 @@ class TestSesson(TestCase):
     def test_session_create_missing_name(self):
         response = self.client.post('/tutor/sessions/new/', {'session-title': ''})
         self.assertContains(response, 'You must specify a title for this session')
+
+    # Add a session and then check it appears in the list of sessions
+    def test_session_create(self):
+        session_name = uuid.uuid4() # Get a random session name
+        response = self.client.post('/tutor/sessions/new/', {'session-title': session_name}, follow=True)
+        self.assertContains(response, session_name)
