@@ -12,7 +12,7 @@
                 <div class="panel-body">
                     {% if login_error %}
                         <div class="alert alert-danger">
-                            <strong>Error!</strong> No {{ realm|title }} with that username/password found!
+                            <strong>Error!</strong> No user with that username/password found!
                         </div>
                     {% endif %}
                     <form role="form" method="POST">{% csrf_token %}
