@@ -54,4 +54,14 @@ class TestSesson(TestCase):
             correct = bool('option-correct[{0}]'.format(i) in question_data)
             option_body = question_data['option-body[{0}]'.format(i)]
             self.assertTrue(Question_option.objects.filter(correct=correct, body=option_body).exists())
-    
+
+    # Attempt to add a question where the "max-options" hidden input is missing 
+    def test_session_add_question_missing_max_options(self):
+        question_data = {
+            'question': 'foo',
+            'option-body[0]': 'bar'
+        }
+
+        response = self.client.post('/tutor/sessions/2/questions/add/', question_data, follow=True)
+
+        assertContains(response, '"max-options" option was missing from your request')
