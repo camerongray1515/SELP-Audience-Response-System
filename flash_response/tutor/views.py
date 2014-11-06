@@ -109,7 +109,7 @@ def edit_question(request, session_id, question_id):
         max_options = request.POST.get('max-options')
 
         # Question must have a body set and the current course must contain the session
-        if question:
+        if question and max_options:
             # We can now add the question to the database
             q = Question.objects.get(pk=question_id)
             q.question_body = question
@@ -130,7 +130,10 @@ def edit_question(request, session_id, question_id):
 
             return HttpResponseRedirect('/tutor/sessions/{0}/'.format(session_id))
         else:
-            data['error'] = 'Your question must have a body'
+            if not max_options:
+                data['error'] = '"max-options" option was missing from your request'
+            else:
+                data['error'] = 'Your question must have a body'
 
     # Get the question and check the session to be sure the tutor owns the question
     try:
@@ -159,7 +162,7 @@ def new_question(request, session_id):
         max_options = request.POST.get('max-options')
 
         # Question must have a body set and the current course must contain the session
-        if question:
+        if question and max_options:
             # We can now add the question to the database
             q = Question()
             q.session_id = session_id
@@ -179,7 +182,11 @@ def new_question(request, session_id):
 
             return HttpResponseRedirect('/tutor/sessions/{0}/'.format(session_id))
         else:
-            data['error'] = 'Your question must have a body'
+            if not max_options:
+                data['error'] = '"max-options" option was missing from your request'
+            else:
+                data['error'] = 'Your question must have a body'
+
 
     return render_to_response('question_form.html', data, context_instance=RequestContext(request))
 
