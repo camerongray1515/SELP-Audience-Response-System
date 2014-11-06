@@ -1,6 +1,8 @@
 import uuid
+import random
 
 from django.test import TestCase, Client
+from main.models import Question_option
 
 class TestSesson(TestCase):
     fixtures = ['basic_setup.json']
@@ -24,5 +26,32 @@ class TestSesson(TestCase):
 
     # Attempt to add a question with no body to this session
     def test_session_add_question_no_name(self):
-        response = self.client.post('/tutor/sessions/2/questions/add/', {'body': ''})
+        response = self.client.post('/tutor/sessions/2/questions/add/', {'question': ''})
         self.assertContains(response, 'Your question must have a body')
+
+    # Add a random question and ensure it is recalled properly
+    def test_session_add_question(self):
+        question_data = {}
+
+        # Give the question a random name
+        question_data['question'] = uuid.uuid4()
+        question_data['max-options'] = 10
+
+        # Loop and add 10 options to the question
+        for i in range(1,question_data['max-options']):
+            question_data['option-body[{0}]'.format(i)] = uuid.uuid4()
+            # Only set option correct if a random variable is true, this similates checkboxes
+            if (random.getrandbits(1)):
+                question_data['option-correct[{0}]'.format(i)] = True
+
+        response = self.client.post('/tutor/sessions/2/questions/add/', question_data, follow=True)
+
+        self.assertContains(response, question_data['question'])
+
+        # We know that the name has saved correctly, now check that the options were correctly saved
+        for i in range(1,question_data['max-options']):
+            # Check if option i exists
+            correct = bool('option-correct[{0}]'.format(i) in question_data)
+            option_body = question_data['option-body[{0}]'.format(i)]
+            self.assertTrue(Question_option.objects.filter(correct=correct, body=option_body).exists())
+    
