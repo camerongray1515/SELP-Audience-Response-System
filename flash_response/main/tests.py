@@ -22,3 +22,25 @@ class TestLogin(TestCase):
         # Use the "tutor.js" include to identify that we have reached
         # the tutor area correctly
         self.assertContains(response, 'tutor.js')
+
+    # If the user logs in with a correct username but incorrect
+    # password, the login should be rejected
+    def test_incorrect_password(self):
+        c = Client()
+        response = c.post('/login/', {
+            'username': self.correct_login['username'],
+            'password': 'incorrect password'}, follow=True)
+        
+        # Use the login error message to identify if the login failed
+        self.assertContains(response, 'No user with that username/password found!')
+
+    # If the user logs in with both an incorrect username and password
+    # the login should be rejected
+    def test_non_existant_user(self):
+        c = Client()
+        response = c.post('/login/', {
+            'username': 'non existant user',
+            'password': 'incorrect password'}, follow=True)
+        
+        # Use the login error message to identify if the login failed
+        self.assertContains(response, 'No user with that username/password found!')
