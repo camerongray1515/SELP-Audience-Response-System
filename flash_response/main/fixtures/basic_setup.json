@@ -1,6 +1,78 @@
 [
 {
     "fields": {
+        "email": "cameron@camerongray.me",
+        "is_superuser": true,
+        "is_staff": true,
+        "groups": [],
+        "username": "camerong",
+        "last_login": "2014-11-06T13:36:02.340Z",
+        "is_active": true,
+        "user_permissions": [],
+        "password": "pbkdf2_sha256$12000$MsrtVFQ5gr6c$PPSEHbgFQjh4kx8O4FaOyqvfXxEjOeytctAXN2cbsmk=",
+        "last_name": "",
+        "date_joined": "2014-11-03T14:01:03.888Z",
+        "first_name": ""
+    },
+    "model": "auth.user",
+    "pk": 1
+},
+{
+    "fields": {
+        "email": "",
+        "is_superuser": false,
+        "is_staff": false,
+        "groups": [],
+        "username": "tutor1",
+        "last_login": "2014-11-03T14:53:17.881Z",
+        "is_active": true,
+        "user_permissions": [],
+        "password": "pbkdf2_sha256$12000$x0voDPHrHlKj$53k08R9uulC/q9KBrdQCEGM8ae12SrI67DYTeU9oyZI=",
+        "last_name": "",
+        "date_joined": "2014-11-03T14:45:47Z",
+        "first_name": ""
+    },
+    "model": "auth.user",
+    "pk": 2
+},
+{
+    "fields": {
+        "email": "",
+        "is_superuser": false,
+        "is_staff": false,
+        "groups": [],
+        "username": "tutor2",
+        "last_login": "2014-11-06T14:05:17.669Z",
+        "is_active": true,
+        "user_permissions": [],
+        "password": "pbkdf2_sha256$12000$lc8pK7vgm8t6$pboC4yHupbhn4+9oqlYC3Pt3vqAB8530CM1kYxeHU7g=",
+        "last_name": "",
+        "date_joined": "2014-11-06T13:36:26.064Z",
+        "first_name": ""
+    },
+    "model": "auth.user",
+    "pk": 3
+},
+{
+    "fields": {
+        "email": "",
+        "is_superuser": false,
+        "is_staff": false,
+        "groups": [],
+        "username": "tutor3",
+        "last_login": "2014-11-06T14:12:35.992Z",
+        "is_active": true,
+        "user_permissions": [],
+        "password": "pbkdf2_sha256$12000$d0uIPQEGT7BD$jaBcnTRCoEh8bkiWquHx601vFcBUQEj0iYaN+kNzLYY=",
+        "last_name": "",
+        "date_joined": "2014-11-06T13:37:21.290Z",
+        "first_name": ""
+    },
+    "model": "auth.user",
+    "pk": 4
+},
+{
+    "fields": {
         "title": "Maths",
         "description": "This is a course on mathematics"
     },
