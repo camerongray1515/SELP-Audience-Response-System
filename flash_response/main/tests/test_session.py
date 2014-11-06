@@ -21,3 +21,8 @@ class TestSesson(TestCase):
         session_name = uuid.uuid4() # Get a random session name
         response = self.client.post('/tutor/sessions/new/', {'session-title': session_name}, follow=True)
         self.assertContains(response, session_name)
+
+    # Attempt to add a question with no body to this session
+    def test_session_add_question_no_name(self):
+        response = self.client.post('/tutor/sessions/2/questions/add/', {'body': ''})
+        self.assertContains(response, 'Your question must have a body')
