@@ -26,7 +26,7 @@ class TestSesson(TestCase):
 
     # Attempt to add a question with no body to this session
     def test_session_add_question_no_name(self):
-        response = self.client.post('/tutor/sessions/2/questions/add/', {'question': ''})
+        response = self.client.post('/tutor/sessions/2/questions/add/', {'question': '', 'max-options': 0})
         self.assertContains(response, 'Your question must have a body')
 
     # Add a random question and ensure it is recalled properly
