@@ -75,3 +75,8 @@ class TestSesson(TestCase):
     def test_session_view_non_existant_question(self):
         response = self.client.get('/tutor/sessions/1/questions/edit/999/')
         self.assertContains(response, 'The question specified could not be found')
+
+    # Attempt to load the edit page for a session in a course that the tutor is not assigned to teach
+    def test_session_view_unassigned_session(self):
+        response = self.client.get('/tutor/sessions/3/questions/edit/4/')
+        self.assertContains(response, 'The session specified could not be found')
