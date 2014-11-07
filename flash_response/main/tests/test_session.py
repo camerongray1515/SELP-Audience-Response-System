@@ -65,3 +65,8 @@ class TestSesson(TestCase):
         response = self.client.post('/tutor/sessions/2/questions/add/', question_data, follow=True)
 
         self.assertContains(response, '&quot;max-options&quot; option was missing from your request')
+
+    # Attempt to load the edit page for a question in a course that the tutor is not assigned to teach
+    def test_session_view_unassigned_question(self):
+        response = self.client.get('/tutor/sessions/3/questions/edit/4/')
+        self.assertContains(response, 'The session specified could not be found')
