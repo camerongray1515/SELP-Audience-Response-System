@@ -22,3 +22,12 @@ class TestRunningSesson(TestCase):
         s_new = Session.objects.get(pk=1)
         self.assertEqual(s_new.running, True)
         self.assertNotEqual(s_new.url_code, s_old.url_code)
+
+    # Get a session, resume it and check that the url_code has not changed
+    def test_resume_existing_session(self):
+        s_old = Session.objects.get(pk=1)
+
+        response = self.client.get('/tutor/sessions/run/1/?resume=true')
+
+        s_new = Session.objects.get(pk=1)
+        self.assertEqual(s_new.url_code, s_old.url_code)
