@@ -8,6 +8,7 @@ from django.views.decorators.csrf import csrf_exempt
 from django.core.exceptions import ObjectDoesNotExist
 from tutor.helpers import *
 from tutor.statistics import Statistics
+from django.utils import timezone
 import json
 import datetime
 
@@ -260,7 +261,7 @@ def api_start_question(request):
         cq.session_id = session_id
         cq.question_id = question_id
         cq.run_time = run_time
-        cq.start_time = datetime.datetime.now() + datetime.timedelta(0,time_offset) # 5 seconds from now
+        cq.start_time = timezone.now() + datetime.timedelta(0,time_offset) # 5 seconds from now
         cq.save()
 
         # Remove any responses stored against this question in the current session run
