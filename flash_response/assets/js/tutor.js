@@ -157,13 +157,15 @@ function Statistics() {
         });
     };
 
-    this.getNumRespondingStudents = function() {
+    getNumRespondingStudents = function() {
         $.post('/tutor/sessions/api/get_number_responding_students/', {
             'sessionId': $('#session-id').val()
         }, function(data) {
-            console.log(data);
+            $('#num-responding-students').text(data.num_students);
         });
     }
+
+    setInterval(getNumRespondingStudents, 2000)
 }
 var statistics = new Statistics();
 
