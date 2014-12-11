@@ -10,6 +10,9 @@ function RunningSession() {
         // countdown until the question starts and then change to a countdown until the
         // question ends.
 
+        // Clear our interval to stop trying to get the number of responding users
+        clearInterval(getNumRespondingStudentsInterval);
+
         myQuestionId = questionId;
         mySessionId = sessionId;
         myRunTime = runTime;
@@ -108,6 +111,7 @@ function RunningSession() {
             $('#question-results').fadeIn();
             statistics.makeQuestionTotalsChart(myQuestionId, mySessionRunId, '#result-chart');
         });
+        getNumRespondingStudentsInterval = setInterval(statistics.getNumRespondingStudents, 2000);
     };
 
     $(document).ready(function() {
@@ -157,17 +161,17 @@ function Statistics() {
         });
     };
 
-    getNumRespondingStudents = function() {
+    this.getNumRespondingStudents = function() {
         $.post('/tutor/sessions/api/get_number_responding_students/', {
             'sessionId': $('#session-id').val()
         }, function(data) {
             $('#num-responding-students').text(data.num_students);
         });
     }
-
-    setInterval(getNumRespondingStudents, 2000)
 }
 var statistics = new Statistics();
+
+var getNumRespondingStudentsInterval = setInterval(statistics.getNumRespondingStudents, 2000);
 
 $(document).ready(function() {
     // Submit the course selection form when the course in the drop down is changed
