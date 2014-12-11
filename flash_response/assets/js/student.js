@@ -68,12 +68,6 @@ function RunningSesson(sessionCode) {
     };
 
 
-    questionComplete = function() {
-        resetQuestionArea();
-        uiToWaiting();
-        runningSession.checkForQuestions(this.sessionCode, this.responderUUID);
-    };
-
     resetQuestionArea = function() {
         // Remove all question buttons
         $('.question-option-button').remove();
@@ -109,6 +103,12 @@ function RunningSesson(sessionCode) {
         return uuid;
     }
     this.responderUUID = createUUID(); // This is used to identify the responder
+
+    questionComplete = function() {
+        resetQuestionArea();
+        uiToWaiting();
+        runningSession.checkForQuestions(runningSession.sessionCode, runningSession.responderUUID);
+    };
 
     // Binding for question options being clicked
     $(document).on('click', '.question-option-button', function() {
