@@ -170,4 +170,22 @@
 <part>id</part>
 </key>
 </table>
+<table x="935" y="15" name="responding_students">
+<row name="id" null="1" autoincrement="1">
+<datatype>TINYINT</datatype>
+<default>NULL</default></row>
+<row name="session" null="1" autoincrement="0">
+<datatype>TINYINT</datatype>
+<default>NULL</default><relation table="sessions" row="id" />
+</row>
+<row name="responder_uuid" null="1" autoincrement="0">
+<datatype>VARCHAR(36)</datatype>
+<default>NULL</default></row>
+<row name="last_seen" null="1" autoincrement="0">
+<datatype>TIMESTAMP</datatype>
+<default>NULL</default></row>
+<key type="PRIMARY" name="">
+<part>id</part>
+</key>
+</table>
 </sql>
