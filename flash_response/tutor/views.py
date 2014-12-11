@@ -3,7 +3,7 @@ from main.decorators import tutor_course_is_selected
 from django.contrib.auth.decorators import login_required
 from django.template import RequestContext
 from django.http import HttpResponse, HttpResponseRedirect
-from main.models import Tutor_assignment, Session, Question, Question_option, Current_question, Student_response, Session_run
+from main.models import Tutor_assignment, Session, Question, Question_option, Current_question, Student_response, Session_run, Responding_student
 from django.views.decorators.csrf import csrf_exempt
 from django.core.exceptions import ObjectDoesNotExist
 from tutor.helpers import *
@@ -296,5 +296,19 @@ def api_get_question_totals(request):
     data = {}
     s = Statistics()
     data['question_totals'] = s.get_question_totals(question_id, session_run_id)
+
+    return HttpResponse(json.dumps(data), content_type='application/json')
+
+@login_required
+@tutor_course_is_selected
+def api_get_number_responding_students(request):
+    session_id = request.GET.get('sessionId')
+
+    must_have_pinged_after = timezone.now() - datetime.timedelta(0,5) # 5 seconds ago
+    students = Responding_student.objects.filter(session=session_id, last_seen__gt=must_have_pinged_after)
+
+    data = {
+        'num_students': len(students)
+    }
 
     return HttpResponse(json.dumps(data), content_type='application/json')
