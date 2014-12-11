@@ -302,7 +302,11 @@ def api_get_question_totals(request):
 @login_required
 @tutor_course_is_selected
 def api_get_number_responding_students(request):
-    session_id = request.GET.get('sessionId')
+    # If this isn't a POST request, fail
+    if not request.method == 'POST':
+        return HttpResponse(json.dumps({'error': 'Request to API methods must be POST'}), content_type='application/json')
+
+    session_id = request.POST.get('sessionId')
 
     must_have_pinged_after = timezone.now() - datetime.timedelta(0,5) # 5 seconds ago
     students = Responding_student.objects.filter(session=session_id, last_seen__gt=must_have_pinged_after)
