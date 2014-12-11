@@ -300,6 +300,7 @@ def api_get_question_totals(request):
     return HttpResponse(json.dumps(data), content_type='application/json')
 
 @login_required
+@csrf_exempt
 @tutor_course_is_selected
 def api_get_number_responding_students(request):
     # If this isn't a POST request, fail
