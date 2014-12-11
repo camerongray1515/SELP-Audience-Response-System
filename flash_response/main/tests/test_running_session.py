@@ -51,7 +51,9 @@ class TestRunningSesson(TestCase):
 
         # Get the question data
         response = self.client.get('/student/check_question_availability/', {
-            'session_code': s.url_code
+            'session_code': s.url_code,
+            # Dummy UUID used to satisfy constraints
+            'responder_uuid': 'de305d54-75b4-431b-adb2-eb6b9e546013'
         })
 
         question_data = json.loads(response.content.decode('utf-8'))
