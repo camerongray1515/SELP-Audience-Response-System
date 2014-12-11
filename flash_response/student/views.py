@@ -1,7 +1,7 @@
 from django.shortcuts import render, render_to_response
 from django.http import HttpResponse, HttpResponseRedirect
 from django.http import Http404
-from main.models import Session, Current_question, Question_option, Student_response, Session_run
+from main.models import Session, Current_question, Question_option, Student_response, Session_run, Responding_student
 from django.core.exceptions import ObjectDoesNotExist
 from django.template import RequestContext
 from django.utils import timezone
@@ -26,12 +26,24 @@ def respond(request, session_code):
 
 def check_question_availability(request):
     session_code = request.GET.get('session_code')
+    responder_uuid = request.GET.get('responder_uuid')
 
     # Check if the session exists and that the student is allowed to access it
     try:
         s = Session.objects.get(url_code=session_code, running=True)
     except ObjectDoesNotExist:
         raise Http404
+
+    # Either insert the responder into the database or update the last_seen attibute
+    try:
+        responding_student = Responding_student.objects.get(responder_uuid=responder_uuid, session=s)
+    except ObjectDoesNotExist:
+        responding_student = Responding_student()
+        responding_student.session = s
+        responding_student.responder_uuid = responder_uuid
+
+    responding_student.last_seen = timezone.now()
+    responding_student.save()
 
     data = {'question_available': False}
     # Now check if there is an assigned question for this session
