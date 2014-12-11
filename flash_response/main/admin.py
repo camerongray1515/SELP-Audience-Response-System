@@ -32,3 +32,7 @@ class Student_response_admin(admin.ModelAdmin):
 @admin.register(Session_run)
 class Session_run_admin(admin.ModelAdmin):
     pass
+
+@admin.register(Responding_student)
+class Responding_student_admin(admin.ModelAdmin):
+    pass
