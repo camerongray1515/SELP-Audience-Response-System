@@ -45,6 +45,14 @@ div.spinner-large {
     display: none;
 }
 
+#running-session-statistics td,th {
+    text-align: center;
+}
+
+#running-session-statistics tbody {
+    font-size: 25px;
+}
+
 /* Student - Session Running */
 #question-container {
     display: none;

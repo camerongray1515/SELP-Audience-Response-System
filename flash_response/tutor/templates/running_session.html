@@ -10,6 +10,23 @@
 
     <div class="alert alert-info"><strong>The response URL for this session is: </strong><a href="{{ response_url }}">{{ response_url }}</a></div>
 
+    <table id="running-session-statistics" class="table table-bordered">
+        <thead>
+            <tr>
+                <th>Users ready to recieve questions</th>
+                <th>Number of responses recieved</th>
+                <th>Percentage recieved</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td id="num-responding-students">Loading...</td>
+                <td id="num-responses-recieved">N/A</td>
+                <td id="percentage-recieved">N/A</td>
+            </tr>
+        </tbody>
+    </table>
+
     <div id="run-question" class="panel panel-default">
         <div class="panel-heading">Run a question:</div>
         <div class="panel-body">
