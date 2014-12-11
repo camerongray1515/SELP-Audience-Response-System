@@ -71,3 +71,9 @@ class Student_response(models.Model):
 
     def __str__(self):
         return "Option: {0}, Session Run: {1}".format(self.option.body, self.session_run.id)
+
+
+class Responding_student(models.Model):
+    session = models.ForeignKey(Session)
+    responder_uuid = models.CharField(max_length=32)
+    last_seen = models.DateTimeField()
