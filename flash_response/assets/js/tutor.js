@@ -156,6 +156,14 @@ function Statistics() {
             $(chartSelector).jChart(jChartData);
         });
     };
+
+    this.getNumRespondingStudents = function() {
+        $.post('/tutor/sessions/api/get_number_responding_students/', {
+            'sessionId': $('#session-id').val()
+        }, function(data) {
+            console.log(data);
+        });
+    }
 }
 var statistics = new Statistics();
 
