@@ -71,7 +71,7 @@ function RunningSesson(sessionCode) {
     questionComplete = function() {
         resetQuestionArea();
         uiToWaiting();
-        runningSession.checkForQuestions();
+        runningSession.checkForQuestions(this.sessionCode, this.responderUUID);
     };
 
     resetQuestionArea = function() {
