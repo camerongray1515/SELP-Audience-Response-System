@@ -309,7 +309,7 @@ def api_get_number_responding_students(request):
     session_id = request.POST.get('sessionId')
 
     must_have_pinged_after = timezone.now() - datetime.timedelta(0,5) # 5 seconds ago
-    students = Responding_student.objects.filter(session=session_id, last_seen__gt=must_have_pinged_after)
+    students = Responding_student.objects.filter(session=session_id, last_seen__gt=must_have_pinged_after, session__course=request.session['course_id'])
 
     data = {
         'num_students': len(students)
