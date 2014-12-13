@@ -148,6 +148,7 @@ var runningSession = new RunningSession();
 
 var numRepsondingStudents;
 
+var getNumRespondingStudentsInterval;
 function Statistics() {
     this.makeQuestionTotalsChart = function(questionId, sessionRunId, chartSelector) {
         // Request the data from the server, transform it into jChart format
@@ -197,10 +198,12 @@ function Statistics() {
             $('#percentage-recieved').text(parseInt((data.num_responses / numRepsondingStudents) * 100) + '%');
         });
     }
+
+    this.startPollingForRespondingStudents = function() {
+         getNumRespondingStudentsInterval = setInterval(statistics.getNumRespondingStudents, 2000);
+    }
 }
 var statistics = new Statistics();
-
-var getNumRespondingStudentsInterval = setInterval(statistics.getNumRespondingStudents, 2000);
 
 $(document).ready(function() {
     // Submit the course selection form when the course in the drop down is changed

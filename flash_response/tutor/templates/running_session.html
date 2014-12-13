@@ -85,4 +85,9 @@
 {% block additional_js_includes %}
     {{ block.super }}
     <script src="{% static 'js/jchart.js' %}"></script>
+    <script type="text/javascript">
+        $(document).ready(function() {
+            statistics.startPollingForRespondingStudents();
+        })
+    </script>
 {% endblock %}
