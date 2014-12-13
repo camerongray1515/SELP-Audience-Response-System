@@ -1,3 +1,5 @@
+var responsePollingInterval;
+
 function RunningSession() {
     var myQuestionId = 0;
     var mySessionId = 0;
@@ -46,6 +48,8 @@ function RunningSession() {
 
     // This is where we start the progress bar and then start polling for responses
     questionRunning = function() {
+        startPollingForResponses();
+
         // Work out how often the progress bar width needs to be increased by 1% by
         var progressBarDelay = (myRunTime * 1000) / 100;
         var progressBarWidth = 0;
@@ -101,17 +105,30 @@ function RunningSession() {
         $('#run-question').fadeOut(function() {
             resetQuestionRunningContainer();
             $('#question-running').fadeIn();
+
+            // Replace "N/A" in the number of responses fields with 0
+            $('#num-responses-recieved').text('0');
+            $('#percentage-recieved').text('0%');
         });
     };
 
     // This switches the UI to show the results for the previously run question
     uiToResults = function() {
+        // Stop polling for responses
+        clearInterval(responsePollingInterval);
+
         $('#question-running').fadeOut(function() {
             $('#run-question').fadeIn();
             $('#question-results').fadeIn();
             statistics.makeQuestionTotalsChart(myQuestionId, mySessionRunId, '#result-chart');
         });
         getNumRespondingStudentsInterval = setInterval(statistics.getNumRespondingStudents, 2000);
+    };
+
+    startPollingForResponses = function() {
+        responsePollingInterval = setInterval(function() {
+            statistics.updateResponsesRecievedCount(mySessionId, myQuestionId);
+        }, 2000); 
     };
 
     $(document).ready(function() {
@@ -129,6 +146,7 @@ function RunningSession() {
 }
 var runningSession = new RunningSession();
 
+var numRepsondingStudents;
 
 function Statistics() {
     this.makeQuestionTotalsChart = function(questionId, sessionRunId, chartSelector) {
@@ -165,7 +183,18 @@ function Statistics() {
         $.post('/tutor/sessions/api/get_number_responding_students/', {
             'sessionId': $('#session-id').val()
         }, function(data) {
+            numRepsondingStudents = data.num_students
             $('#num-responding-students').text(data.num_students);
+        });
+    }
+
+    this.updateResponsesRecievedCount = function(sessionId, questionId) {
+        $.post('/tutor/sessions/api/get_number_responses/', {
+            'sessionId': sessionId,
+            'questionId': questionId 
+        }, function(data) {
+            $('#num-responses-recieved').text(data.num_responses);
+            $('#percentage-recieved').text(parseInt((data.num_responses / numRepsondingStudents) * 100) + '%');
         });
     }
 }
