@@ -317,3 +317,23 @@ def api_get_number_responding_students(request):
     }
 
     return HttpResponse(json.dumps(data), content_type='application/json')
+
+@login_required
+@csrf_exempt
+@tutor_course_is_selected
+def api_get_number_responses(request):
+    # If this isn't a POST request, fail
+    if not request.method == 'GET':
+        return HttpResponse(json.dumps({'error': 'Request to API methods must be GET'}), content_type='application/json')
+
+    session_id = request.GET.get('sessionId')
+    question_id = request.GET.get('questionId')
+
+    session_run = Session_run.objects.filter(session=session_id).order_by('-start_time')[0]
+    responses = Student_response.objects.filter(session_run=session_run, option__question=question_id)
+
+    data = {
+        'num_responses': len(responses)
+    }
+
+    return HttpResponse(json.dumps(data), content_type='application/json')
