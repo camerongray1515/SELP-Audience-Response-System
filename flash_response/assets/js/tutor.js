@@ -205,6 +205,29 @@ function Statistics() {
 }
 var statistics = new Statistics();
 
+
+function Reports() {
+    this.populateSessionRuns = function() {
+        $.post('/tutor/reports/api/get_session_runs/', {
+            'sessionId': $('#session-select').val()
+        }, function (data) {
+            sessionRunOptionTemplate = $('#session-run-option-template').html();
+            sessionRuns = data.session_runs;
+            $('#session-run-select').html(''); // Clear the placeholder out first
+            for (var i = sessionRuns.length - 1; i >= 0; i--) {
+                sessionRun = sessionRuns[i];
+
+                option = sessionRunOptionTemplate;
+                option = option.replace('[#sessionRunId#]', sessionRun.id);
+                option = option.replace('[#sessionRunDatetime#]', sessionRun.start_time);
+                $('#session-run-select').append(option);
+            };
+        });
+    }
+}
+var reports = new Reports();
+
+
 $(document).ready(function() {
     // Submit the course selection form when the course in the drop down is changed
     $('#course-selection').change(function() {
@@ -217,6 +240,8 @@ $(document).ready(function() {
             return false;
         }
     });
+
+    $('#session-select').change(reports.populateSessionRuns);
 
 
     // Add a question option to the table

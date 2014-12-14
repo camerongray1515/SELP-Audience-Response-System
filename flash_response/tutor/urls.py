@@ -14,4 +14,6 @@ urlpatterns = patterns('',
     url(r'^sessions/api/get_question_totals/$', 'tutor.views.api_get_question_totals'),
     url(r'^sessions/api/get_number_responding_students/$', 'tutor.views.api_get_number_responding_students'),
     url(r'^sessions/api/get_number_responses/$', 'tutor.views.api_get_number_responses'),
+    url(r'^reports/$', 'tutor.views.reports_home'),
+    url(r'^reports/api/get_session_runs/$', 'tutor.views.api_report_get_session_runs'),
 )

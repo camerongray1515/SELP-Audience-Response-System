@@ -337,3 +337,40 @@ def api_get_number_responses(request):
     }
 
     return HttpResponse(json.dumps(data), content_type='application/json')
+
+@login_required
+@tutor_course_is_selected
+def reports_home(request):
+    sessions = Session.objects.filter(course=request.session['course_id'])
+
+    data = {
+        'sessions': sessions
+    }
+
+    return render_to_response('reports_home.html', data, context_instance=RequestContext(request))
+
+@login_required
+@csrf_exempt
+@tutor_course_is_selected
+def api_report_get_session_runs(request):
+    # If this isn't a POST request, fail
+    if not request.method == 'POST':
+        return HttpResponse(json.dumps({'error': 'Request to API methods must be POST'}), content_type='application/json')
+
+    session_id = request.POST.get('sessionId')
+
+    session_runs = Session_run.objects.filter(session=session_id, session__course=request.session['course_id']).order_by('start_time')
+
+    session_runs_clean = []
+    for session_run in session_runs:
+        session_run_clean = {
+            'id': session_run.pk,
+            'start_time': session_run.start_time.strftime("%A, %d. %B %Y %I:%M%p")
+        }
+        session_runs_clean.append(session_run_clean)
+
+    data = {
+        'session_runs': session_runs_clean
+    }
+
+    return HttpResponse(json.dumps(data), content_type='application/json')
