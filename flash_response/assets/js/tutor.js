@@ -107,8 +107,8 @@ function RunningSession() {
             $('#question-running').fadeIn();
 
             // Replace "N/A" in the number of responses fields with 0
-            $('#num-responses-recieved').text('0');
-            $('#percentage-recieved').text('0%');
+            $('#num-responses-received').text('0');
+            $('#percentage-received').text('0%');
         });
     };
 
@@ -127,7 +127,7 @@ function RunningSession() {
 
     startPollingForResponses = function() {
         responsePollingInterval = setInterval(function() {
-            statistics.updateResponsesRecievedCount(mySessionId, myQuestionId);
+            statistics.updateResponsesReceivedCount(mySessionId, myQuestionId);
         }, 2000); 
     };
 
@@ -189,13 +189,13 @@ function Statistics() {
         });
     }
 
-    this.updateResponsesRecievedCount = function(sessionId, questionId) {
+    this.updateResponsesReceivedCount = function(sessionId, questionId) {
         $.post('/tutor/sessions/api/get_number_responses/', {
             'sessionId': sessionId,
             'questionId': questionId 
         }, function(data) {
-            $('#num-responses-recieved').text(data.num_responses);
-            $('#percentage-recieved').text(parseInt((data.num_responses / numRepsondingStudents) * 100) + '%');
+            $('#num-responses-received').text(data.num_responses);
+            $('#percentage-received').text(parseInt((data.num_responses / numRepsondingStudents) * 100) + '%');
         });
     }
 
