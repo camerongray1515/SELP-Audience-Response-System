@@ -7,4 +7,48 @@
 
 \begin{document}
 	\maketitle
+	
+	\section*{Introduction}
+	\paragraph{}
+	For this project I built an "Audience Response System", similar to the "clicker" system used within
+	the university.  The idea came about after seeing clear frustration with the current system that is in
+	in use due to a few main failings - It is slow, the software is confusing to use and students are
+	required to collect and look after a piece of hardware.  This would be implemented as an entirely web
+	based application where both the tutor and students interact with the software using a web browser.
+	
+	\section*{Technologies}
+	\paragraph{Backend}	
+	I decided to use the Django web framework.  I chose this for several reasons - I am
+	familiar with the Python programming language (which Django uses), I am already very well versed in
+	Model, View, Controller web development and the framework is very well established and supported.
+	
+	\paragraph{CSS}
+	I have used Twitter's Bootstrap framework to provide most of the CSS styling for this application -
+	This allowed me to not only build a good looking application, it saved the time that I would otherwise
+	have had to spend building a custom CSS template.  Bootstrap is also extremely well documented which
+	will aid maintenance in the future since there is already very comprehensive documentation for the
+	frontend CSS.
+	
+	\paragraph{Frontend Javascript}
+	I have used the jQuery Javascript framework as it is an extremely well established framework that
+	provides several time saving functions that would otherwise need implemented manually such as DOM
+	manipulation and AJAX.
+	
+	\paragraph{Database}
+	Throughout development I have used an SQLite database, this was used due to its simplistic nature and
+	because it does not require that a database server is running on every machine that I am developing
+	on.  In production use SQLite would not be suitable as it is not designed to support several
+	concurrent users, in this case the application would need to use a more powerful database server such
+	as PostgreSQL.  Thankfully due to the high level of abstraction from the database that Django provide,
+	changing to a new database server is as simple as changing a single configuration file to reflect the
+	settings for the new database - The underlying application would not require any changes.
+	
+	
+	
+	\iffalse
+	  I counteracted these issues by making an easy
+	to use web application where students can respond to questions using hardware they already have such
+	as a smartphone, a tablet or a laptop.  This also has the added advantage of allowing students to
+	respond to questions from anywhere in the world, they do not have to be in the same room as 
+	\fi
 \end{document}
