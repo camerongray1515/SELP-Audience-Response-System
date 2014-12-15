@@ -2,7 +2,7 @@ from django.shortcuts import render, render_to_response
 from main.decorators import tutor_course_is_selected
 from django.contrib.auth.decorators import login_required
 from django.template import RequestContext
-from django.http import HttpResponse, HttpResponseRedirect
+from django.http import HttpResponse, HttpResponseRedirect, Http404
 from main.models import Tutor_assignment, Session, Question, Question_option, Current_question, Student_response, Session_run, Responding_student
 from django.views.decorators.csrf import csrf_exempt
 from django.core.exceptions import ObjectDoesNotExist
@@ -374,3 +374,75 @@ def api_report_get_session_runs(request):
     }
 
     return HttpResponse(json.dumps(data), content_type='application/json')
+
+@login_required
+@tutor_course_is_selected
+def session_run_report(request):
+    session_run_id = request.GET.get('session_run')
+
+    data = {}
+
+    try:
+        data['session_run'] = Session_run.objects.get(pk=session_run_id, session__course=request.session['course_id'])
+    except ObjectDoesNotExist:
+        raise Http404
+
+    # This is the data that we process to make the leaderboard
+    question_responses = Student_response.objects.filter(session_run=session_run_id)
+
+    # Get the leaderboard for question response quantity
+    question_response_quantities = {}
+    for response in question_responses:
+        question_body = response.option.question.question_body
+        if not question_body in question_response_quantities:
+            question_response_quantities[question_body] = 0
+
+        question_response_quantities[question_body] += 1
+
+    data['question_response_quantities'] = []
+    # We must now loop through the dictionary in order and convert it to an ordered list
+    position = 1
+    for question in sorted(question_response_quantities, key=question_response_quantities.get, reverse=True):
+        question_entry = {
+            'position': position,
+            'body': question,
+            'num_responses': question_response_quantities[question]
+        }
+        data['question_response_quantities'].append(question_entry)
+        position += 1
+
+    # Get the leaderboard for question accuracy
+
+    # First pass through the responses and count the number of correct/incorrect for each question
+    question_response_counts = {}
+    for response in question_responses:
+        question_body = response.option.question.question_body
+        if not question_body in question_response_counts:
+            question_response_counts[question_body] = {'correct': 0, 'incorrect': 0}
+
+        if response.option.correct:
+            question_response_counts[question_body]['correct'] += 1
+        else:
+            question_response_counts[question_body]['incorrect'] += 1
+
+    # Now pass through the list again and generate the percentage correct for each question
+    question_response_percentages = {}
+    for question in question_response_counts:
+        question_counts = question_response_counts[question]
+        percentage_correct = (question_counts['correct'] / (question_counts['correct'] + question_counts['incorrect'])) * 100
+
+        question_response_percentages[question] = percentage_correct
+
+    data['question_response_percentages'] = []
+    # We must now loop through the dictionary in order and convert it to an ordered list
+    position = 1
+    for question in sorted(question_response_percentages, key=question_response_percentages.get, reverse=True):
+        question_entry = {
+            'position': position,
+            'body': question,
+            'percentage_correct': question_response_percentages[question]
+        }
+        data['question_response_percentages'].append(question_entry)
+        position += 1
+
+    return render_to_response('session_run_report.html', data, context_instance=RequestContext(request))
