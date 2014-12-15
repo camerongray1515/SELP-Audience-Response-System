@@ -68,6 +68,40 @@
 	this would not be an issue as the vast majority of students own at least one device that offers a web
 	browser.
 	
+	\section*{Terminology}
+	\paragraph{}
+	Before proceeding I feel that it is important to clarify some of the system specific terminology that
+	is used in both this report and in the software itself in the context of the system being used live
+	in a lecture environment.
+	
+	\paragraph{Tutor}
+	A tutor is a person who would be inputting questions, sending them out to students and looking at the
+	responses. This person would most likely be the lecturer.  Every tutor has exactly one django user for
+	authentication.
+	
+	\paragraph{Course}
+	A course is a specific subject that is being taught, this would generally be directly related to the
+	courses that the university teaches.  A course for example could be "Software Engineering Large
+	Practical" or "Operating Systems".
+	
+	\paragraph{Session}
+	A session is a group of questions, these would usually be grouped together in the same way that a
+	lecture would - In most cases you would have one session for each lecture.  An example of a session
+	could be "Git - Source Code Control" or "Memory Management".
+	
+	\paragraph{Session Run}
+	A session run can be thought of as an instance of a session.  Each individual lecture would relate to
+	a single session run.  The reason that they are differentiated is because the same lecture may be
+	repeated at different times and the results from the questions should be kept separate between both of
+	them.  A session run has both a time at which it was started and the single session that it is an
+	instance of.
+	
+	\paragraph{Question Option}
+	A question option would relate to a single possible answer to a multiple choice question.  It contains
+	a "body" and is related to a single question. A question option can either be correct or incorrect. As
+	an example, for the question "What colour is the sky?" the question options could be: Red (Inorrect),
+	Green (Incorrect), Blue (Correct).
+	
 	\chapter*{Implementation Details}
 	\section*{Database Design}
 	\paragraph{}
