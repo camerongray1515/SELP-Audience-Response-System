@@ -202,4 +202,39 @@
     I have relied heavily on the jQuery Javascript Library throughout this application as it provides
     extremely useful time-saving methods for AJAX and DOM manipulation.  It is also an extremely mature
     library that is used on the vast majority of modern websites and web applications.
+    
+    \chapter*{Future Enhancements}
+    \paragraph{}
+    There are many different improvements/enhancements that I would implement in this application given
+    more time.  These are detailed in this section.
+    
+    \section*{WebSockets}
+    \paragraph{}
+    At the moment the frontend Javascript communicates with the backend server entirely using AJAX
+    requests.  This means that when the frontend is waiting for something it has to poll the backend at a
+    regular interval until it receives the response that it is waiting for. This method is used in areas
+    of the application such as when the student area is waiting for the tutor to start a question or when
+    the tutor area is retrieving how many students have responded to a question while the question is
+    running.
+    
+    \paragraph{}
+    The problem with this method is that it creates a lot of unnecessary requests to the server.  For a
+    prototype this is not a problem however if we were to scale this application up to hundreds of users
+    it could become a problem.  For example, the student area polls to check if a question is available
+    every two seconds.  Therefore if we had 100 students in a class, the server would be receiving
+    $(100/2)*60=3000$ server calls a minute!  Now imagine if this was deployed across a university where
+    there could be several lectures of 100 students using the system at any one time.
+    
+    \paragraph{}
+    The solution to this problem would be to implement WebSockets.  Therefore instead of the frontend
+    constantly polling the server for data, the frontend opens a socket connection to the server.  The
+    frontend can then pass data down this to the server (as it would do with AJAX) but it has the
+    advantage that the server can pass up data to the frontend.  Therefore instead of students' devices 
+    constantly polling the server to see if there is a question available, the server will instead push
+    the question out to the students.
+    
+    \paragraph{}
+    Due to time restrictions this was not implemented in this version of the software however if the
+    software were ever to be released or used in a live environment, this functionality would be
+    implemented as a top priority.
 \end{document}
