@@ -113,4 +113,61 @@
 	
 	\vspace{+10px}
 	\includegraphics[width=\linewidth]{"report assets/database".png}
+	
+	\paragraph{}
+	Using this diagram has proven extremely useful as it not only makes development easier, it aids
+	maintainability down the line as developers can easily visualise exactly how the data is structured
+	instead of manually having to look at the models or database itself.
+	
+	\section*{Code Structure}
+	\subsection*{Backend}
+	\paragraph{}
+	Due to the use of the Django framework, the structure of code is very rigidly defined which means that
+	it would be familiar to any Django developer who is required to work on the project.  The code is
+	divided up into three different Django "apps".  The first powers the tutor area, the second powers the
+	student area and the third app called "main" contains components that are shared by both the tutor and
+	student areas.
+	
+	\paragraph{Models}
+	This "main" app contains all of the models, the reasoning behind this is that in this system, all of
+	the models are shared very closely between the two apps.  If I were	storing data that would be used
+	only in the student area or only in the tutor area, then the models would be stored in the respective
+	app rather than in "main".  The individual models themselves are kept very simple and mostly just
+	define the data that is to be stored in them as well as default values.  Every model also contains a
+	"\_\_str\_\_" method which is used to give each model a human readable string.  This is not used in
+	the running of the application but makes the data a lot easier to understand when manually querying
+	the models from the django shell or when using Django's premade admin area.
+	
+	\paragraph{Views}
+	The views.py files in both the tutor and student apps holds most of the backed code. Django
+	confusingly calls the file views.py but in the sense of MVC this file acts as a "controller" and the
+	Django "templates" act like a view.  The main job of the code located in these view files is to take
+	data recieved in the request and then either use this to insert data into the database, modify
+	existing data in the database or to retrieve data from the database.  The result is then rendered into
+	a template that is displayed to the user.
+	
+	\paragraph{Templates}
+	The templates are stored both in the root directory (for base templates that area later extended) and
+	in the individual apps themselves (for app specific templates).  Inheritance is used throughout the
+	templates to ensure that code is not duplicated between pages, this means that if changes are to be
+	made to a common area (e.g. the navigation bar), only one file needs to be changed.  This also
+	prevents inconsistencies between pages.
+	
+	\paragraph{Project Settings}
+	The flash\_response directory is a Django default directory which holds project level files including
+	the main settings file and the base URL routes file.
+	
+	\paragraph{Decorators}
+	The decorators.py file inside the main app is where I define Python decorator functions, at the moment
+	there is a single decorator called "tutor\_course\_is\_selected" - When a function is decorated with
+	this, the function can only execute if the tutor has selected a course from the course selection menu.
+	If a course is not selected, the page will instead redirect to the tutor index page where a message
+	will instruct the user to select a course.
+	
+	\paragraph{Context Processors}
+	The context\_processors.py file in the tutor app contains a single context processor called 
+	"course\_assignments\_processor."  This is used to ensure that the list of courses that the tutor
+	is assigned to teach is always available in all templates in the tutor area since this list is used
+	to create the common navigation bar.  This saves a lot of code reuse as otherwise, every single view
+	that renders a template would have to get the courses and pass it into the template renderer.
 \end{document}
