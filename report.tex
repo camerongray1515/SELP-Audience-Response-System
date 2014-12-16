@@ -174,7 +174,32 @@
 	\subsection*{Frontend CSS}
 	\paragraph{}
 	This project uses the Twitter Bootstrap CSS framework therefore there is only a small amount of
-	hand-written CSS.  All of the CSS is stored in the /assets/css directory.  The bootstrap* files are
+	hand-written CSS.  All of the CSS is stored in the /assets/css/ directory.  The bootstrap* files are
 	all part of the Bootstrap framework.  The style.css file was written by myself in order to add some
 	extra styling and to override some of Bootstrap's default styles.
+	
+	\subsection*{Frontend Javascript}
+	\paragraph{}
+	All of my frontend Javascript is located in the /assets/js/ directory.  The bootstrap and jChart files
+	are both libraries that I did not write but are used inside the application itself.   The student.js
+	file provides the Javascript functionality for the student area and the tutor.js file provides the
+	functionality for the tutor area.
+	
+	\paragraph{}
+	This Javascript code has been written in an object oriented manner.  This is mostly to ensure that
+	the individual parts of the Javascript code is kept separate from one another and so that the
+	different components are clearly separated.
+	
+	\paragraph{}
+	The frontend Javascript code in this application provides two main functions at the frontend.  I
+	extensively	use AJAX in order to asynchronously transfer data between the backend server and the
+	frontend software.  An example of this is the AJAX request that is made to the backend when the user
+	picks an answer to a question.  The Javascript is also used to provide a lot of the user interface; it
+	is used	for showing/hiding parts of the page as well as being used to populate parts of the page with
+    dynamic data received from the backend.
+    
+    \paragraph{}
+    I have relied heavily on the jQuery Javascript Library throughout this application as it provides
+    extremely useful time-saving methods for AJAX and DOM manipulation.  It is also an extremely mature
+    library that is used on the vast majority of modern websites and web applications.
 \end{document}
