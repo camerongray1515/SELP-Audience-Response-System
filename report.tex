@@ -4,6 +4,7 @@
 
 \usepackage[margin=1.5cm]{geometry}
 \usepackage{graphicx}
+\usepackage{listings}
 
 \begin{document}
 	\maketitle
@@ -202,6 +203,60 @@
     I have relied heavily on the jQuery Javascript Library throughout this application as it provides
     extremely useful time-saving methods for AJAX and DOM manipulation.  It is also an extremely mature
     library that is used on the vast majority of modern websites and web applications.
+    
+    \chapter*{Instructions}
+    \section*{Installation}
+    \paragraph{}
+    The following instructions detail how to install and run this project on DICE.
+    
+    \paragraph{Create Virtual Environment}
+    Change to the directory that contains the application directory.  You will need to create a Python 3.4
+    virtual environment.  When I tested on DICE I discovered that the version of the virtualenv command
+    installed is out of date and does not support Python 3.4.  Therefore I had to create a Python 2.7
+    virtual environment then from within that install the newest virtualenv command, This will then let
+    you create a Python 3.4 virtual environment.
+    \begin{lstlisting}[language=bash]
+    	$ virtualenv -p /usr/bin/python2.7 ENV2.7
+    	$ source ENV2.7/bin/activate	# Activate this virtual environment
+    	$ pip install virtualenv	# Install a supported version of virtualenv
+    	$ virtualenv-2.7 -p /usr/bin/python3.4 ENV3.4
+    	$ deactivate	# Leave the Python 2.7 virtual environment
+    \end{lstlisting}
+    
+    \paragraph{Enter Virtual Environment}
+    Before running any other parts of this project, you must switch into the virtual environment that you
+    just created.  To do this run:
+    \begin{lstlisting}[language=bash]
+    	$ source ENV3.4/bin/activate
+    \end{lstlisting}
+    To deactivate the virtual environment you can then run:
+    \begin{lstlisting}[language=bash]
+    	$ deactivate
+    \end{lstlisting}
+    
+    \paragraph{Installing Dependences}
+    This project has some dependencies that need to be installed.  These are stored in the 
+    requirements.txt file and can be installed using pip as follows.  Remember, you must be in the virtual
+    environment.  Change into the directory containing requirements.txt (The root of the project) and run:
+    \begin{lstlisting}[language=bash]
+    	$ pip install -r requirements.txt
+    \end{lstlisting}
+    
+    \paragraph{Running Tests}
+    The test suite can be executed by changing into the flash\_response directory (which contains the main
+    code) and running:
+    \begin{lstlisting}[language=bash]
+    	$ python manage.py test -v 2
+    \end{lstlisting}
+    
+    \paragraph{Starting the Server}
+    In order to start using the software you must start the Django development server.  To do this, change
+    into the flash\_response directory and execute:
+    \begin{lstlisting}[language=bash]
+    	$ python manage.py runserver
+    \end{lstlisting}
+    The server will now begin to listen on localhost at port 8000.  You can now access the software at 
+    http://127.0.0.1:8000/
     
     \chapter*{Future Enhancements}
     \paragraph{}
