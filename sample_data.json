@@ -1,0 +1,470 @@
+[
+{
+  "fields": {
+    "user_permissions": [],
+    "is_active": true,
+    "last_name": "",
+    "last_login": "2014-12-11T17:32:50.311Z",
+    "groups": [],
+    "email": "cameron@camerongray.me",
+    "date_joined": "2014-11-03T14:01:03.888Z",
+    "username": "camerong",
+    "is_superuser": true,
+    "first_name": "",
+    "is_staff": true,
+    "password": "pbkdf2_sha256$12000$MsrtVFQ5gr6c$PPSEHbgFQjh4kx8O4FaOyqvfXxEjOeytctAXN2cbsmk="
+  },
+  "model": "auth.user",
+  "pk": 1
+},
+{
+  "fields": {
+    "user_permissions": [],
+    "is_active": true,
+    "last_name": "",
+    "last_login": "2014-12-14T23:28:49.157Z",
+    "groups": [],
+    "email": "",
+    "date_joined": "2014-11-03T14:45:47Z",
+    "username": "tutor1",
+    "is_superuser": false,
+    "first_name": "",
+    "is_staff": false,
+    "password": "pbkdf2_sha256$12000$x0voDPHrHlKj$53k08R9uulC/q9KBrdQCEGM8ae12SrI67DYTeU9oyZI="
+  },
+  "model": "auth.user",
+  "pk": 2
+},
+{
+  "fields": {
+    "user_permissions": [],
+    "is_active": true,
+    "last_name": "",
+    "last_login": "2014-12-14T20:41:25.409Z",
+    "groups": [],
+    "email": "",
+    "date_joined": "2014-11-06T13:36:26.064Z",
+    "username": "tutor2",
+    "is_superuser": false,
+    "first_name": "",
+    "is_staff": false,
+    "password": "pbkdf2_sha256$12000$lc8pK7vgm8t6$pboC4yHupbhn4+9oqlYC3Pt3vqAB8530CM1kYxeHU7g="
+  },
+  "model": "auth.user",
+  "pk": 3
+},
+{
+  "fields": {
+    "user_permissions": [],
+    "is_active": true,
+    "last_name": "",
+    "last_login": "2014-12-14T23:29:02.972Z",
+    "groups": [],
+    "email": "",
+    "date_joined": "2014-11-06T13:37:21.290Z",
+    "username": "tutor3",
+    "is_superuser": false,
+    "first_name": "",
+    "is_staff": false,
+    "password": "pbkdf2_sha256$12000$d0uIPQEGT7BD$jaBcnTRCoEh8bkiWquHx601vFcBUQEj0iYaN+kNzLYY="
+  },
+  "model": "auth.user",
+  "pk": 4
+},
+{
+  "pk": 1,
+  "fields": {
+    "description": "This is a course on mathematics",
+    "title": "Maths"
+  },
+  "model": "main.course"
+},
+{
+  "pk": 2,
+  "fields": {
+    "description": "This is a course on Computing",
+    "title": "Computing"
+  },
+  "model": "main.course"
+},
+{
+  "pk": 1,
+  "fields": {
+    "user": 2,
+    "course": 1
+  },
+  "model": "main.tutor_assignment"
+},
+{
+  "pk": 2,
+  "fields": {
+    "user": 3,
+    "course": 2
+  },
+  "model": "main.tutor_assignment"
+},
+{
+  "pk": 3,
+  "fields": {
+    "user": 4,
+    "course": 1
+  },
+  "model": "main.tutor_assignment"
+},
+{
+  "pk": 4,
+  "fields": {
+    "user": 4,
+    "course": 2
+  },
+  "model": "main.tutor_assignment"
+},
+{
+  "pk": 1,
+  "fields": {
+    "url_code": "47z8v",
+    "running": true,
+    "title": "Addition",
+    "course": 1
+  },
+  "model": "main.session"
+},
+{
+  "pk": 2,
+  "fields": {
+    "url_code": "",
+    "running": false,
+    "title": "Multiplication",
+    "course": 1
+  },
+  "model": "main.session"
+},
+{
+  "pk": 3,
+  "fields": {
+    "url_code": "b7wt4",
+    "running": true,
+    "title": "Hardware",
+    "course": 2
+  },
+  "model": "main.session"
+},
+{
+  "pk": 4,
+  "fields": {
+    "url_code": "solpg",
+    "running": false,
+    "title": "Software",
+    "course": 2
+  },
+  "model": "main.session"
+},
+{
+  "pk": 1,
+  "fields": {
+    "question_body": "What is 1+1?",
+    "session": 1
+  },
+  "model": "main.question"
+},
+{
+  "pk": 2,
+  "fields": {
+    "question_body": "What is 3+5?",
+    "session": 1
+  },
+  "model": "main.question"
+},
+{
+  "pk": 3,
+  "fields": {
+    "question_body": "What is 5+0?",
+    "session": 1
+  },
+  "model": "main.question"
+},
+{
+  "pk": 4,
+  "fields": {
+    "question_body": "Which of these is short term storage?",
+    "session": 3
+  },
+  "model": "main.question"
+},
+{
+  "pk": 5,
+  "fields": {
+    "question_body": "How many threads does an i7 4790k have?",
+    "session": 3
+  },
+  "model": "main.question"
+},
+{
+  "pk": 6,
+  "fields": {
+    "question_body": "Which of these is an Operating System?",
+    "session": 4
+  },
+  "model": "main.question"
+},
+{
+  "pk": 7,
+  "fields": {
+    "question_body": "Which of these would you use to create a spreadsheet?",
+    "session": 4
+  },
+  "model": "main.question"
+},
+{
+  "pk": 9,
+  "fields": {
+    "body": "5",
+    "correct": true,
+    "question": 3
+  },
+  "model": "main.question_option"
+},
+{
+  "pk": 10,
+  "fields": {
+    "body": "0",
+    "correct": false,
+    "question": 3
+  },
+  "model": "main.question_option"
+},
+{
+  "pk": 11,
+  "fields": {
+    "body": "4",
+    "correct": false,
+    "question": 3
+  },
+  "model": "main.question_option"
+},
+{
+  "pk": 12,
+  "fields": {
+    "body": "6",
+    "correct": false,
+    "question": 3
+  },
+  "model": "main.question_option"
+},
+{
+  "pk": 13,
+  "fields": {
+    "body": "8",
+    "correct": true,
+    "question": 2
+  },
+  "model": "main.question_option"
+},
+{
+  "pk": 14,
+  "fields": {
+    "body": "9",
+    "correct": false,
+    "question": 2
+  },
+  "model": "main.question_option"
+},
+{
+  "pk": 15,
+  "fields": {
+    "body": "4",
+    "correct": false,
+    "question": 2
+  },
+  "model": "main.question_option"
+},
+{
+  "pk": 16,
+  "fields": {
+    "body": "2",
+    "correct": false,
+    "question": 2
+  },
+  "model": "main.question_option"
+},
+{
+  "pk": 17,
+  "fields": {
+    "body": "1",
+    "correct": false,
+    "question": 1
+  },
+  "model": "main.question_option"
+},
+{
+  "pk": 18,
+  "fields": {
+    "body": "2",
+    "correct": true,
+    "question": 1
+  },
+  "model": "main.question_option"
+},
+{
+  "pk": 19,
+  "fields": {
+    "body": "3",
+    "correct": false,
+    "question": 1
+  },
+  "model": "main.question_option"
+},
+{
+  "pk": 20,
+  "fields": {
+    "body": "4",
+    "correct": false,
+    "question": 1
+  },
+  "model": "main.question_option"
+},
+{
+  "pk": 21,
+  "fields": {
+    "body": "RAM",
+    "correct": true,
+    "question": 4
+  },
+  "model": "main.question_option"
+},
+{
+  "pk": 22,
+  "fields": {
+    "body": "Hard Drive",
+    "correct": false,
+    "question": 4
+  },
+  "model": "main.question_option"
+},
+{
+  "pk": 23,
+  "fields": {
+    "body": "SSD",
+    "correct": false,
+    "question": 4
+  },
+  "model": "main.question_option"
+},
+{
+  "pk": 24,
+  "fields": {
+    "body": "CPU",
+    "correct": false,
+    "question": 4
+  },
+  "model": "main.question_option"
+},
+{
+  "pk": 25,
+  "fields": {
+    "body": "2",
+    "correct": false,
+    "question": 5
+  },
+  "model": "main.question_option"
+},
+{
+  "pk": 26,
+  "fields": {
+    "body": "4",
+    "correct": false,
+    "question": 5
+  },
+  "model": "main.question_option"
+},
+{
+  "pk": 27,
+  "fields": {
+    "body": "8",
+    "correct": true,
+    "question": 5
+  },
+  "model": "main.question_option"
+},
+{
+  "pk": 28,
+  "fields": {
+    "body": "16",
+    "correct": false,
+    "question": 5
+  },
+  "model": "main.question_option"
+},
+{
+  "pk": 33,
+  "fields": {
+    "body": "Excel",
+    "correct": true,
+    "question": 7
+  },
+  "model": "main.question_option"
+},
+{
+  "pk": 34,
+  "fields": {
+    "body": "Word",
+    "correct": false,
+    "question": 7
+  },
+  "model": "main.question_option"
+},
+{
+  "pk": 35,
+  "fields": {
+    "body": "PowerPoint",
+    "correct": false,
+    "question": 7
+  },
+  "model": "main.question_option"
+},
+{
+  "pk": 36,
+  "fields": {
+    "body": "Access",
+    "correct": false,
+    "question": 7
+  },
+  "model": "main.question_option"
+},
+{
+  "pk": 37,
+  "fields": {
+    "body": "Microsoft Windows",
+    "correct": true,
+    "question": 6
+  },
+  "model": "main.question_option"
+},
+{
+  "pk": 38,
+  "fields": {
+    "body": "Microsoft Word",
+    "correct": false,
+    "question": 6
+  },
+  "model": "main.question_option"
+},
+{
+  "pk": 39,
+  "fields": {
+    "body": "Microsoft Access",
+    "correct": false,
+    "question": 6
+  },
+  "model": "main.question_option"
+},
+{
+  "pk": 40,
+  "fields": {
+    "body": "Microsoft Excel",
+    "correct": false,
+    "question": 6
+  },
+  "model": "main.question_option"
+}
+]
