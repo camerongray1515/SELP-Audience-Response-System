@@ -10,6 +10,7 @@ urlpatterns = patterns('',
     url(r'^login/', include('user_authentication.urls')),
     url(r'^tutor/', include('tutor.urls')),
     url(r'^student/', include('student.urls')),
-   	# This must be kept last
+    url(r'^$', 'main.views.home'),
+    # This must be kept last
     url(r'^(?P<session_code>\w+)/$', 'student.views.respond'),
 )
