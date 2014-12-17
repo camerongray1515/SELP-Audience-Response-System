@@ -242,6 +242,15 @@
     	$ pip install -r requirements.txt
     \end{lstlisting}
     
+    \paragraph{Insert Sample Data}
+    In order to insert the data you must run two commands, one to create the database itself from the
+    models and the second to import the sample data which is sufficient for testing the system. Change to
+    the flash\_response directory (the one containing manage.py) and run:
+    \begin{lstlisting}[language=bash]
+    	$ python manage.py syncdb
+    	$ python manage.py loaddata ../sample\_data.json
+    \end{lstlisting}
+    
     \paragraph{Running Tests}
     The test suite can be executed by changing into the flash\_response directory (which contains the main
     code) and running:
