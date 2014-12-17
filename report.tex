@@ -223,7 +223,9 @@
     it could become a problem.  For example, the student area polls to check if a question is available
     every two seconds.  Therefore if we had 100 students in a class, the server would be receiving
     $(100/2)*60=3000$ server calls a minute!  Now imagine if this was deployed across a university where
-    there could be several lectures of 100 students using the system at any one time.
+    there could be several lectures of 100 students using the system at any one time.  This could also be
+    an issue if people are responding on battery operated devices as these additional server calls could
+    potentially impact on battery life.
     
     \paragraph{}
     The solution to this problem would be to implement WebSockets.  Therefore instead of the frontend
