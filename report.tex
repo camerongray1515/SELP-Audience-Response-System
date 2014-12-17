@@ -211,23 +211,16 @@
     
     \paragraph{Create Virtual Environment}
     Change to the directory that contains the application directory.  You will need to create a Python 3.4
-    virtual environment.  When I tested on DICE I discovered that the version of the virtualenv command
-    installed is out of date and does not support Python 3.4.  Therefore I had to create a Python 2.7
-    virtual environment then from within that install the newest virtualenv command, This will then let
-    you create a Python 3.4 virtual environment.
+    virtual environment.  To do this, run the following command:
     \begin{lstlisting}[language=bash]
-    	$ virtualenv -p /usr/bin/python2.7 ENV2.7
-    	$ source ENV2.7/bin/activate	# Activate this virtual environment
-    	$ pip install virtualenv	# Install a supported version of virtualenv
-    	$ virtualenv-2.7 -p /usr/bin/python3.4 ENV3.4
-    	$ deactivate	# Leave the Python 2.7 virtual environment
+    	$ pyvenv-3.4 ENV
     \end{lstlisting}
     
     \paragraph{Enter Virtual Environment}
     Before running any other parts of this project, you must switch into the virtual environment that you
     just created.  To do this run:
     \begin{lstlisting}[language=bash]
-    	$ source ENV3.4/bin/activate
+    	$ source ENV/bin/activate
     \end{lstlisting}
     To deactivate the virtual environment you can then run:
     \begin{lstlisting}[language=bash]
