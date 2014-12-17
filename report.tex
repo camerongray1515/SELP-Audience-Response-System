@@ -260,6 +260,53 @@
     The server will now begin to listen on localhost at port 8000.  You can now access the software at 
     http://127.0.0.1:8000/
     
+    \section*{Usage}
+    \paragraph{}
+    This section will give a rough tour of the application to allow you to gain enough understanding in
+    order to be able to use it effectively.  Before doing any of these steps, ensure that the server is
+    running as detailed above.
+    
+    \paragraph*{Logging In as a Tutor}
+    To login as a tutor go to http://127.0.0.1:8000/.  You will be presented with a simple welcome page
+    and a button to take you into the tutor area, click on this button to be presented with a login form.
+    In the sample data there are three tutors named tutor1, tutor2 and tutor3, all with the password 1234. 
+    Tutor1 is enrolled to teach Maths, tutor2 is enrolled to teach Computing and tutor3 is enrolled to
+    teach both.  Pick one of these tutors and login.
+    
+    \paragraph*{Selecting a Course}
+    When you log in you will be asked to select a course to manage, to do this use the drop down menu in
+    the top right of the page to select a course, this will only show the courses that the tutor you have
+    logged in as is enrolled to teach.
+    
+    \paragraph*{Sessions}
+	The "Sessions" button at the top of the page will take you to the sessions page.  Here you can create
+	new sessions, edit existing ones (such as adding/changing questions) or start a session to send
+	questions to students.
+	
+	\paragraph*{Starting a Session}
+	To run a session and therefore ask students questions, pick one from the sessions page and click
+	"Start New Session".  This will open the session console.  In here you will see a blue box containing
+	the "Response URL" - This is the URL that students would navigate to in order to answer questions. For
+	testing I would recommend opening a few copies of this URL in different tabs/browser windows.  Notice
+	how the session console will update to show the number of students currently waiting to respond.
+	
+	\paragraph*{Asking and responding to a question}
+	To ask a question to the class, pick one from the list in the "Run a question" section and enter a
+	time in seconds to represent how long the question should be run for.  Then press "Start Question."
+	After a 5 second countdown, the question will start and the session console will display a countdown
+	as well as live updating to display the number of responses received.  While the question is running,
+	look at the pages you have opened with the response URL (they must be open before you start the
+	question).  On these pages you should see the question along with the possible options, on each page,
+	click one of the options to simulate a student answering  a question.  Once the question finishes, the
+	session console will display a bar chart that represents the results of the question.
+	
+	\paragraph*{Viewing Reports}
+	The reports section (accessed via the "Reports" link in the tutor navigation bar) allows you to
+	generate reports for each session run.  This will rank questions by how accurately they were answered
+	and by how many people responded to them.  On the Reports page, select a session and then select the
+	date and time of the run from the "Session Run" box.  Now click "Generate Report" to display the
+	report for that session run.
+    
     \chapter*{Future Enhancements}
     \paragraph{}
     There are many different improvements/enhancements that I would implement in this application given
