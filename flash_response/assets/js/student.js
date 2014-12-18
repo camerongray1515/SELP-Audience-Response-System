@@ -1,7 +1,9 @@
+var allowedToRespond = true;
 function RunningSesson(sessionCode) {
     this.sessionCode = sessionCode;
 
     this.checkForQuestions = function(sessionCode, responderUUID) {
+        allowedToRespond = true;
         $.get('/student/check_question_availability/', {
             'session_code': sessionCode,
             'responder_uuid': responderUUID
@@ -61,10 +63,13 @@ function RunningSesson(sessionCode) {
     };
 
     transmitResponse = function(optionId) {
-        $.post('/student/log_response/', {
-            'optionId': optionId,
-            'sessionCode': this.sessionCode
-        });
+        if (allowedToRespond) {
+            $.post('/student/log_response/', {
+                'optionId': optionId,
+                'sessionCode': this.sessionCode
+            });
+        }
+        allowedToRespond = false;
     };
 
 
