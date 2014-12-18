@@ -204,6 +204,22 @@
     extremely useful time-saving methods for AJAX and DOM manipulation.  It is also an extremely mature
     library that is used on the vast majority of modern websites and web applications.
     
+    \section*{Testing}
+    \paragraph{}
+    For this project I chose to implement functional tests, due to how well they tie into a web
+    application.  I have implemented them using Django's own testing framework and used their Test Client
+    which allows you to send simulated POST and GET requests to the server and make assertions on the
+    server's response.  These tests are located in /main/tests/.  For these tests I test both basic
+    functionality such as adding a question and then checking it exists in the database as well as much
+    more advanced functionality such as attempting to edit sessions in a course that the tutor is not
+    assigned to (this should be blocked) and testing a full simulation of a question where 1000 random
+    responses are sent to a question and the results recorded in the database are checked to ensure they
+    match up with what was sent.  To run the tests you need to run:
+    \begin{lstlisting}[language=bash]
+    	$ python manage.py test -v 2
+    \end{lstlisting}
+
+    
     \chapter*{Instructions}
     \section*{Installation}
     \paragraph{}
@@ -343,4 +359,21 @@
     Due to time restrictions this was not implemented in this version of the software however if the
     software were ever to be released or used in a live environment, this functionality would be
     implemented as a top priority.
+    
+    \section*{Change question while in progress}
+    \paragraph{}
+    Ideally I would like to make it possible for the tutor to make changes while the question is in
+    progress, this would mean that the tutor could stop the question early or add more time if students
+    are taking longer than expected to complete the questions.
+    
+    \section*{API}
+    \paragraph{}
+    I would like to create an API for the application, mostly for the student area.  This would allow
+    applications for smartphones to be developed instead of requiring students to use a web browser.
+    
+    \section*{More Testing}
+    \paragraph{}
+    At the moment I have written a reasonable number of functional tests for the application.  However I
+    would like to not only write more tests, I would like to run mutation testing on the application to
+    make sure that the tests that I do have are comprehensive.
 \end{document}
