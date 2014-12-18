@@ -100,7 +100,7 @@
 	\paragraph{Question Option}
 	A question option would relate to a single possible answer to a multiple choice question.  It contains
 	a "body" and is related to a single question. A question option can either be correct or incorrect. As
-	an example, for the question "What colour is the sky?" the question options could be: Red (Inorrect),
+	an example, for the question "What colour is the sky?" the question options could be: Red (Incorrect),
 	Green (Incorrect), Blue (Correct).
 	
 	\chapter*{Implementation Details}
@@ -143,7 +143,7 @@
 	The views.py files in both the tutor and student apps holds most of the backed code. Django
 	confusingly calls the file views.py but in the sense of MVC this file acts as a "controller" and the
 	Django "templates" act like a view.  The main job of the code located in these view files is to take
-	data recieved in the request and then either use this to insert data into the database, modify
+	data received in the request and then either use this to insert data into the database, modify
 	existing data in the database or to retrieve data from the database.  The result is then rendered into
 	a template that is displayed to the user.
 	
@@ -175,7 +175,7 @@
 	\subsection*{Frontend CSS}
 	\paragraph{}
 	This project uses the Twitter Bootstrap CSS framework therefore there is only a small amount of
-	hand-written CSS.  All of the CSS is stored in the /assets/css/ directory.  The bootstrap* files are
+	hand-written CSS.  All of the CSS is stored in the /assets/css/ directory.  The bootstrap files are
 	all part of the Bootstrap framework.  The style.css file was written by myself in order to add some
 	extra styling and to override some of Bootstrap's default styles.
 	
@@ -416,7 +416,7 @@
     \paragraph{Javascript}
     At the moment the Javascript is written using classes.  While this is useful in many
     cases, in this situation it offers way more power than is required and adds significant complexity.
-    This is especially noticable due to the asynchronous nature of the Javascript code.  For example, if
+    This is especially noticeable due to the asynchronous nature of the Javascript code.  For example, if
     you use setTimeout or setInterval inside a class it will detach and can no longer access private
     attributes and methods of the class. Instead I would like to refactor this so that the Javascript is
     namespaced, this would still allow the different functionality to be separated but would solve a lot
