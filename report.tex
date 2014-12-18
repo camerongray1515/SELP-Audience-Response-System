@@ -218,7 +218,34 @@
     \begin{lstlisting}[language=bash]
     	$ python manage.py test -v 2
     \end{lstlisting}
-
+    
+	\section*{Interesting Points about the Implementation}
+	\subsection*{Keeping everything in time}
+	\paragraph{}
+	Because the student area poll the backend every 2 seconds to check if a question is available, it
+	becomes tricky to ensure that all students are presented with the question at practically the
+	same time.  I was able to solve this problem by implementing the 5 second countdown that is seen
+	between clicking to start a question and the question actually being seen by students.
+	
+	\paragraph{}
+	During this countdown, the student clients will poll the backend and be presented with both the
+	question as well as the number of milliseconds until they are to present the question to the user.
+	Once this period of time has elapsed, the client will display the question to the user.  This proved
+	to be a very successful and simple way to keep everything in time.
+	
+	\paragraph{}
+	I also made sure to never use the time on the client device, everything is timed to the time set on
+	the server, client devices only deal with time intervals (numbers of milliseconds) - This prevents
+	time discrepancies across devices from causing problems.
+	
+	\subsection*{Counting users that are currently waiting to respond}
+	\paragraph{}
+	Another challenge I discovered was to be able to display the number of users waiting to receive a
+	question in the session console.  I was able to solve this issue by having each student device send
+	a UUID (unique identifier) along with every request to check if a question is available.  The server
+	then stores this UUID in the database along with the date/time the user was last seen.  The
+	application	then regards a student as waiting to respond to a question as long as the server has
+	received a request from that user's UUID within the last 5 seconds.
     
     \chapter*{Instructions}
     \section*{Installation}
