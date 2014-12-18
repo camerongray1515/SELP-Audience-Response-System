@@ -466,5 +466,469 @@
     "question": 6
   },
   "model": "main.question_option"
+},
+{
+  "model": "main.session_run",
+  "fields": {
+    "session": 1,
+    "start_time": "2014-12-17T23:26:08.883Z"
+  },
+  "pk": 1
+},
+{
+  "model": "main.session_run",
+  "fields": {
+    "session": 1,
+    "start_time": "2014-12-17T23:34:44.373Z"
+  },
+  "pk": 2
+},
+{
+  "model": "main.session_run",
+  "fields": {
+    "session": 3,
+    "start_time": "2014-12-18T00:46:53.647Z"
+  },
+  "pk": 3
+},
+{
+  "model": "main.session_run",
+  "fields": {
+    "session": 4,
+    "start_time": "2014-12-18T00:49:08.994Z"
+  },
+  "pk": 4
+},
+{
+  "fields": {
+    "session_run": 2,
+    "option": 18
+  },
+  "pk": 1,
+  "model": "main.student_response"
+},
+{
+  "fields": {
+    "session_run": 2,
+    "option": 17
+  },
+  "pk": 2,
+  "model": "main.student_response"
+},
+{
+  "fields": {
+    "session_run": 2,
+    "option": 17
+  },
+  "pk": 3,
+  "model": "main.student_response"
+},
+{
+  "fields": {
+    "session_run": 2,
+    "option": 17
+  },
+  "pk": 4,
+  "model": "main.student_response"
+},
+{
+  "fields": {
+    "session_run": 2,
+    "option": 18
+  },
+  "pk": 5,
+  "model": "main.student_response"
+},
+{
+  "fields": {
+    "session_run": 2,
+    "option": 18
+  },
+  "pk": 6,
+  "model": "main.student_response"
+},
+{
+  "fields": {
+    "session_run": 2,
+    "option": 13
+  },
+  "pk": 7,
+  "model": "main.student_response"
+},
+{
+  "fields": {
+    "session_run": 2,
+    "option": 13
+  },
+  "pk": 8,
+  "model": "main.student_response"
+},
+{
+  "fields": {
+    "session_run": 2,
+    "option": 13
+  },
+  "pk": 9,
+  "model": "main.student_response"
+},
+{
+  "fields": {
+    "session_run": 2,
+    "option": 14
+  },
+  "pk": 10,
+  "model": "main.student_response"
+},
+{
+  "fields": {
+    "session_run": 2,
+    "option": 9
+  },
+  "pk": 11,
+  "model": "main.student_response"
+},
+{
+  "fields": {
+    "session_run": 2,
+    "option": 9
+  },
+  "pk": 12,
+  "model": "main.student_response"
+},
+{
+  "fields": {
+    "session_run": 2,
+    "option": 9
+  },
+  "pk": 13,
+  "model": "main.student_response"
+},
+{
+  "fields": {
+    "session_run": 2,
+    "option": 9
+  },
+  "pk": 14,
+  "model": "main.student_response"
+},
+{
+  "fields": {
+    "session_run": 2,
+    "option": 9
+  },
+  "pk": 15,
+  "model": "main.student_response"
+},
+{
+  "fields": {
+    "session_run": 3,
+    "option": 21
+  },
+  "pk": 16,
+  "model": "main.student_response"
+},
+{
+  "fields": {
+    "session_run": 3,
+    "option": 21
+  },
+  "pk": 17,
+  "model": "main.student_response"
+},
+{
+  "fields": {
+    "session_run": 3,
+    "option": 21
+  },
+  "pk": 18,
+  "model": "main.student_response"
+},
+{
+  "fields": {
+    "session_run": 3,
+    "option": 22
+  },
+  "pk": 19,
+  "model": "main.student_response"
+},
+{
+  "fields": {
+    "session_run": 3,
+    "option": 21
+  },
+  "pk": 20,
+  "model": "main.student_response"
+},
+{
+  "fields": {
+    "session_run": 3,
+    "option": 21
+  },
+  "pk": 21,
+  "model": "main.student_response"
+},
+{
+  "fields": {
+    "session_run": 3,
+    "option": 23
+  },
+  "pk": 22,
+  "model": "main.student_response"
+},
+{
+  "fields": {
+    "session_run": 3,
+    "option": 23
+  },
+  "pk": 23,
+  "model": "main.student_response"
+},
+{
+  "fields": {
+    "session_run": 3,
+    "option": 21
+  },
+  "pk": 24,
+  "model": "main.student_response"
+},
+{
+  "fields": {
+    "session_run": 3,
+    "option": 27
+  },
+  "pk": 25,
+  "model": "main.student_response"
+},
+{
+  "fields": {
+    "session_run": 3,
+    "option": 27
+  },
+  "pk": 26,
+  "model": "main.student_response"
+},
+{
+  "fields": {
+    "session_run": 3,
+    "option": 27
+  },
+  "pk": 27,
+  "model": "main.student_response"
+},
+{
+  "fields": {
+    "session_run": 3,
+    "option": 27
+  },
+  "pk": 28,
+  "model": "main.student_response"
+},
+{
+  "fields": {
+    "session_run": 3,
+    "option": 27
+  },
+  "pk": 29,
+  "model": "main.student_response"
+},
+{
+  "fields": {
+    "session_run": 3,
+    "option": 26
+  },
+  "pk": 30,
+  "model": "main.student_response"
+},
+{
+  "fields": {
+    "session_run": 3,
+    "option": 26
+  },
+  "pk": 31,
+  "model": "main.student_response"
+},
+{
+  "fields": {
+    "session_run": 3,
+    "option": 26
+  },
+  "pk": 32,
+  "model": "main.student_response"
+},
+{
+  "fields": {
+    "session_run": 3,
+    "option": 25
+  },
+  "pk": 33,
+  "model": "main.student_response"
+},
+{
+  "fields": {
+    "session_run": 3,
+    "option": 26
+  },
+  "pk": 34,
+  "model": "main.student_response"
+},
+{
+  "fields": {
+    "session_run": 4,
+    "option": 37
+  },
+  "pk": 35,
+  "model": "main.student_response"
+},
+{
+  "fields": {
+    "session_run": 4,
+    "option": 37
+  },
+  "pk": 36,
+  "model": "main.student_response"
+},
+{
+  "fields": {
+    "session_run": 4,
+    "option": 37
+  },
+  "pk": 37,
+  "model": "main.student_response"
+},
+{
+  "fields": {
+    "session_run": 4,
+    "option": 37
+  },
+  "pk": 38,
+  "model": "main.student_response"
+},
+{
+  "fields": {
+    "session_run": 4,
+    "option": 37
+  },
+  "pk": 39,
+  "model": "main.student_response"
+},
+{
+  "fields": {
+    "session_run": 4,
+    "option": 39
+  },
+  "pk": 40,
+  "model": "main.student_response"
+},
+{
+  "fields": {
+    "session_run": 4,
+    "option": 37
+  },
+  "pk": 41,
+  "model": "main.student_response"
+},
+{
+  "fields": {
+    "session_run": 4,
+    "option": 37
+  },
+  "pk": 42,
+  "model": "main.student_response"
+},
+{
+  "fields": {
+    "session_run": 4,
+    "option": 40
+  },
+  "pk": 43,
+  "model": "main.student_response"
+},
+{
+  "fields": {
+    "session_run": 4,
+    "option": 39
+  },
+  "pk": 44,
+  "model": "main.student_response"
+},
+{
+  "fields": {
+    "session_run": 4,
+    "option": 33
+  },
+  "pk": 45,
+  "model": "main.student_response"
+},
+{
+  "fields": {
+    "session_run": 4,
+    "option": 33
+  },
+  "pk": 46,
+  "model": "main.student_response"
+},
+{
+  "fields": {
+    "session_run": 4,
+    "option": 33
+  },
+  "pk": 47,
+  "model": "main.student_response"
+},
+{
+  "fields": {
+    "session_run": 4,
+    "option": 33
+  },
+  "pk": 48,
+  "model": "main.student_response"
+},
+{
+  "fields": {
+    "session_run": 4,
+    "option": 33
+  },
+  "pk": 49,
+  "model": "main.student_response"
+},
+{
+  "fields": {
+    "session_run": 4,
+    "option": 33
+  },
+  "pk": 50,
+  "model": "main.student_response"
+},
+{
+  "fields": {
+    "session_run": 4,
+    "option": 36
+  },
+  "pk": 51,
+  "model": "main.student_response"
+},
+{
+  "fields": {
+    "session_run": 4,
+    "option": 36
+  },
+  "pk": 52,
+  "model": "main.student_response"
+},
+{
+  "fields": {
+    "session_run": 4,
+    "option": 35
+  },
+  "pk": 53,
+  "model": "main.student_response"
+},
+{
+  "fields": {
+    "session_run": 4,
+    "option": 34
+  },
+  "pk": 54,
+  "model": "main.student_response"
 }
 ]
