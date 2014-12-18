@@ -12,6 +12,11 @@ function RunningSession() {
         // countdown until the question starts and then change to a countdown until the
         // question ends.
 
+        // Run time must be greater than 0
+        if (runTime <= 0) {
+            return;
+        }
+
         // Clear our interval to stop trying to get the number of responding users
         clearInterval(getNumRespondingStudentsInterval);
 
