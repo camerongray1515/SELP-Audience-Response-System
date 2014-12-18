@@ -195,7 +195,13 @@ function Statistics() {
             'questionId': questionId 
         }, function(data) {
             $('#num-responses-received').text(data.num_responses);
-            $('#percentage-received').text(parseInt((data.num_responses / numRepsondingStudents) * 100) + '%');
+
+            var percentage_received = 0;
+            if (numRepsondingStudents != 0) {
+                percentage_received = parseInt((data.num_responses / numRepsondingStudents) * 100);
+            }
+
+            $('#percentage-received').text(percentage_received + '%');
         });
     }
 
